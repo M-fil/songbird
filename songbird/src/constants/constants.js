@@ -17,6 +17,8 @@ const listOfBirds = {
 
 const mainBlockConstants = {
   AUDIO_IS_NOT_SUPPORTED: 'Тег audio не поддерживается вашим браузером.',
+  NEXT_BUTTON_TEXT: 'Дальше',
+  NO_ASNWER_TEXT: 'Послушайте плеер. Выберите птицу из списка',
 };
 
 export {

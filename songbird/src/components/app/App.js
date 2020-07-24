@@ -2,6 +2,7 @@ import React from 'react';
 
 import Header from '../header/Header';
 import BirdCard from '../bird-card/BirdCard';
+import Answers from '../answers/Answers';
 
 function App() {
   return (
@@ -9,21 +10,13 @@ function App() {
       <Header />
       <main>
         <BirdCard
-          birdImageURL=''
-          birdName=''
-          birdSoundURL=''
+          id=''
+          imageURL=''
+          name=''
+          soundURL=''
           isCurrentBird={true}
         />
-        <div className="answers">
-          <div className="answers__list" />
-          <div className="answers__active-answer" />
-          <button
-            type="button"
-            className="next-bird-button"
-          >
-            Next
-          </button>
-        </div>
+        <Answers />
       </main>
     </>
   );
