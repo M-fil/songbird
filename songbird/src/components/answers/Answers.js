@@ -1,5 +1,6 @@
-import './answers-list.scss'
+import './answers-list.scss';
 import React from 'react';
+import PropTypes, { objectOf } from 'prop-types';
 
 import BirdCard from '../bird-card/BirdCard';
 import mainBlockConstants from '../../constants/constants';
@@ -13,40 +14,54 @@ function Answers({
   birds,
   activeBirdObject,
   correctBirdId,
-  nextBirdCardHandler
+  nextBirdCardHandler,
 }) {
   return (
     <div className="answers">
       <div className="answers__list">
-        {birds.map((bird) => <BirdCard
-          id={bird.id}
-          imageURL={bird.image}
-          name={bird.name}
-          soundURL={bird.audio}
-          description={bird.description}
-          species={bird.species}
-        />)}
+        {birds.map((bird) => (
+          <BirdCard
+            id={bird.id}
+            imageURL={bird.image}
+            name={bird.name}
+            soundURL={bird.audio}
+            description={bird.description}
+            species={bird.species}
+          />
+        ))}
       </div>
       <div className="answers__active-answer">
-        {activeBirdObject ? <BirdCard
-          id={activeBirdObject.id}
-          imageURL={activeBirdObject.image}
-          name={activeBirdObject.name}
-          soundURL={activeBirdObject.audio}
-          description={activeBirdObject.description}
-          species={activeBirdObject.species}
-        /> : <div className="asnwers__no-answer-text">{NO_ASNWER_TEXT}</div>}
+        {activeBirdObject ? (
+          <BirdCard
+            id={activeBirdObject.id}
+            imageURL={activeBirdObject.image}
+            name={activeBirdObject.name}
+            soundURL={activeBirdObject.audio}
+            description={activeBirdObject.description}
+            species={activeBirdObject.species}
+          />
+        ) : <div className="asnwers__no-answer-text">{NO_ASNWER_TEXT}</div>}
       </div>
       <button
         type="button"
-        className="next-bird-button"
+        id="next-bird-button"
+        className="answers__next-bird-button"
         onClick={nextBirdCardHandler}
         disabled={activeBirdObject !== correctBirdId}
       >
         {NEXT_BUTTON_TEXT}
       </button>
     </div>
-  )
+  );
 }
+
+const birdObjectPropType = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
+
+Answers.propTypes = {
+  birds: PropTypes.arrayOf(objectOf(birdObjectPropType)).isRequired,
+  activeBirdObject: PropTypes.objectOf(birdObjectPropType).isRequired,
+  correctBirdId: PropTypes.number.isRequired,
+  nextBirdCardHandler: PropTypes.func.isRequired,
+};
 
 export default Answers;

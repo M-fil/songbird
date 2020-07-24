@@ -40,7 +40,7 @@ function BirdCard({
         {!isCurrentBird && <div className="bird-card__species">{species}</div>}
         <div className="bird-card__audio-block">
           <audio controls>
-            <track kind="captions"></track>
+            <track kind="captions" />
             <source src={soundURL} type="audio/mpeg" />
             {AUDIO_IS_NOT_SUPPORTED}
           </audio>
@@ -59,6 +59,6 @@ BirdCard.propTypes = {
   description: PropTypes.string,
   species: PropTypes.string,
   isCurrentBird: PropTypes.bool,
-}
+};
 
 export default BirdCard;

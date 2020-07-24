@@ -10,11 +10,11 @@ function App() {
       <Header />
       <main>
         <BirdCard
-          id=''
-          imageURL=''
-          name=''
-          soundURL=''
-          isCurrentBird={true}
+          id=""
+          imageURL=""
+          name=""
+          soundURL=""
+          isCurrentBird
         />
         <Answers />
       </main>
