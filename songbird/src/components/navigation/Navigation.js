@@ -8,9 +8,14 @@ import {
 function Navigation() {
   return (
     <div className="header__bird-types">
-      {Object.values(listOfBirds)
-        .map((birdType) => (
-          <div className="header__bird-type">{birdType}</div>
+      {Object.keys(listOfBirds)
+        .map((birdTypeKey) => (
+          <div
+            key={birdTypeKey}
+            className="header__bird-type"
+          >
+            {listOfBirds[birdTypeKey]}
+          </div>
         ))}
     </div>
   );

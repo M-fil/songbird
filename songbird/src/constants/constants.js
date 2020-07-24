@@ -1,5 +1,6 @@
-const ulrs = {
+const urls = {
   DEFAUL_BIRD_IMAGE_URL: './src/assets/images/default-bird-image.png',
+  BIRDS_INFO_URL: 'https://raw.githubusercontent.com/M-fil/tasks/master/tasks/songbird/birds.json',
 };
 
 const headerConstants = {
@@ -23,15 +24,23 @@ const mainBlockConstants = {
 
 const resultsBlockConstants = {
   MAX_SCORE_FOR_SINGLE_ANSWER: 5,
-  MAX_SCORE_FOR_GAME: (Object.values(listOfBirds).length - 1) * this.MAX_SCORE_FOR_SINGLE_ANSWER,
-  SCORE_TEXT: (score, maxScore = this.MAX_SCORE_FOR_GAME) => `Набранные очки: ${score} из ${maxScore}`,
+  MAX_SCORE_FOR_GAME: () => (
+    (Object.values(listOfBirds).length - 1) * this.MAX_SCORE_FOR_SINGLE_ANSWER
+  ),
+  SCORE_TEXT: (score, maxScore = this.MAX_SCORE_FOR_GAME()) => `Набранные очки: ${score} из ${maxScore}`,
   PLAY_AGAIN_BUTTON_TEXT: 'Играть снова',
+};
+
+const fetchStatuses = {
+  LOADING: 'loading',
+  ERROR: 'error',
 };
 
 export {
   headerConstants,
   listOfBirds,
   mainBlockConstants,
-  ulrs,
+  urls,
   resultsBlockConstants,
+  fetchStatuses,
 };

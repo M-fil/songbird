@@ -3,7 +3,9 @@ import React from 'react';
 import PropTypes, { objectOf } from 'prop-types';
 
 import BirdCard from '../bird-card/BirdCard';
-import mainBlockConstants from '../../constants/constants';
+import {
+  mainBlockConstants,
+} from '../../constants/constants';
 
 const {
   NEXT_BUTTON_TEXT,
@@ -21,7 +23,8 @@ function Answers({
       <div className="answers__list">
         {birds.map((bird) => (
           <BirdCard
-            id={bird.id}
+            key={`${bird.name}-${bird.id}`}
+            id={`${bird.name}-${bird.id}`}
             imageURL={bird.image}
             name={bird.name}
             soundURL={bird.audio}
@@ -33,7 +36,7 @@ function Answers({
       <div className="answers__active-answer">
         {activeBirdObject ? (
           <BirdCard
-            id={activeBirdObject.id}
+            id={`${activeBirdObject.name}-${activeBirdObject.id}`}
             imageURL={activeBirdObject.image}
             name={activeBirdObject.name}
             soundURL={activeBirdObject.audio}

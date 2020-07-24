@@ -27,7 +27,7 @@ function BirdCard({
   return (
     <div
       className={`bird-card${currentBirdCardClassName}`}
-      data-bird-id={id}
+      data-bird-id={`${name}-${id}`}
     >
       <div
         className="bird-card__image"
@@ -52,13 +52,20 @@ function BirdCard({
 }
 
 BirdCard.propTypes = {
-  birdId: PropTypes.string.isRequired,
-  birdImageURL: PropTypes.string,
-  birdName: PropTypes.string.isRequired,
-  birdSoundURL: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  imageURL: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  soundURL: PropTypes.string.isRequired,
   description: PropTypes.string,
   species: PropTypes.string,
   isCurrentBird: PropTypes.bool,
+};
+
+BirdCard.defaultProps = {
+  imageURL: DEFAUL_BIRD_IMAGE_URL,
+  description: '',
+  species: '',
+  isCurrentBird: false,
 };
 
 export default BirdCard;
