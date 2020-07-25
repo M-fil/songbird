@@ -13,3 +13,19 @@ body {
 button, input, select, textarea {
   @include initial-styles-for-elements;
 }
+
+#root {
+  display: flex;
+  justify-content: center;
+
+  background: $main-background-color;
+}
+
+#game-wrapper {
+  min-height: 100vh;
+  max-width: 1200px;
+}
+
+.game-block {
+  background: $game-blocks-background-color;
+}

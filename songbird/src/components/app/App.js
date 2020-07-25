@@ -39,7 +39,7 @@ function App() {
   }
 
   return (
-    <>
+    <div id="game-wrapper">
       <Header
         score={score}
       />
@@ -60,7 +60,7 @@ function App() {
         />
       </main>
       )}
-    </>
+    </div>
   );
 }
 

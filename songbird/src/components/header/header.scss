@@ -1,0 +1,28 @@
+@import '../../scss/abstract/mixins.scss';
+@import '../../scss/abstract/constants.scss';
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding-top: 20px;
+}
+
+.header__logo-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__logo {
+  background: url($logo-path);
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  width: 200px;
+  height: 55px;
+}
+
+.header__score {
+  @include font(2rem, 2.5rem);
+}

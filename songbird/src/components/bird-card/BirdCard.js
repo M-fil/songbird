@@ -1,3 +1,5 @@
+import './bird-card.scss';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -22,7 +24,7 @@ function BirdCard({
   species = '',
   isCurrentBird,
 }) {
-  const currentBirdCardClassName = isCurrentBird ? ' bird-card_current' : '';
+  const currentBirdCardClassName = isCurrentBird ? ' bird-card_current game-block' : '';
 
   return (
     <div
@@ -36,10 +38,13 @@ function BirdCard({
         }}
       />
       <div className="bird-card__main-info">
-        <div className="bird-card__name">{name}</div>
+        <h3 className="bird-card__name">{name}</h3>
         {!isCurrentBird && <div className="bird-card__species">{species}</div>}
         <div className="bird-card__audio-block">
-          <audio controls>
+          <audio
+            className="bird-card__audio"
+            controls
+          >
             <track kind="captions" />
             <source src={soundURL} type="audio/mpeg" />
             {AUDIO_IS_NOT_SUPPORTED}

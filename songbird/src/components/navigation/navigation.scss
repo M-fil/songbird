@@ -1,0 +1,32 @@
+@import '../../scss/abstract/mixins.scss';
+@import '../../scss/abstract/constants.scss';
+@import '../../scss/abstract/placeholders.scss';
+
+.header__bird-types {
+  display: flex;
+  justify-content: space-between;
+
+  background: $navigation-item-background-color;
+  border-radius: 5px;
+}
+
+.header__bird-type {
+  @extend %standard-button-transition;
+  @include font(2rem, 2.5rem);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  padding: 10px 20px;
+  text-align: center;
+
+  &:hover {
+    background: $hover-navigation-item-background-color
+  }
+
+  &_active {
+    background: $active-navigation-item-background-color;
+  }
+}

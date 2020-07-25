@@ -4,6 +4,8 @@ $tablet-width: 768px;
 $mobile-big-width: 425px;
 $mobile-small-width: 320px;
 
+$logo-path: '../../assets/images/logo.svg';
+
 $main-background-color: #222222;
 $game-blocks-background-color: #303030;
 $enabled-next-button-background-color: #008966;
@@ -11,7 +13,9 @@ $disabled-next-button-background-color: #303030;
 $standard-text-color: #FFFFFF;
 $navigation-item-background-color: #008966;
 $active-navigation-item-background-color: #00BC8C;
+$hover-navigation-item-background-color: rgba(0, 188, 140, 0.4);
 $standard-hover-item-background-color: #444444;
+$standard-border-color: #737373;
 
 $audio-playing-bar-background-color: #737373;
 $audio-play-button-color: #008966;

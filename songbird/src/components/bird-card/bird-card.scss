@@ -1,0 +1,49 @@
+@import '../../scss/abstract/mixins.scss';
+@import '../../scss/abstract/constants.scss';
+
+.bird-card_current {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 20px;
+
+  & .bird-card__main-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+
+    height: 200px;
+  }
+
+  & .bird-card__image {
+    margin-right: 50px;
+  }
+
+  & .bird-card__audio-block {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+
+    border-top: 1px solid $standard-border-color;
+  }
+}
+
+.bird-card__image {
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+}
+
+.bird-card__name {
+  @include font(3rem, 3.5rem, 700);
+}
+
+.bird-card__audio {
+  width: 100%;
+}

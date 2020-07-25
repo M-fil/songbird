@@ -21,7 +21,7 @@ function Answers({
 }) {
   return (
     <div className="answers">
-      <div className="answers__list">
+      <div className="answers__list game-block">
         {birds.map((bird) => (
           <AnswerBirdCard
             key={`${bird.name}-${bird.id}`}
@@ -33,7 +33,7 @@ function Answers({
           />
         ))}
       </div>
-      <div className="answers__active-answer">
+      <div className="answers__active-answer game-block">
         {activeBirdObject ? (
           <BirdCard
             id={`${activeBirdObject.name}-${activeBirdObject.id}`}
