@@ -8,6 +8,19 @@
 
   background: $navigation-item-background-color;
   border-radius: 5px;
+
+  @include media-tablet {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @include media-mobile {
+   flex-direction: column;
+   
+   & > * {
+     width: 100%;
+   }
+  }
 }
 
 .header__bird-type {
@@ -21,6 +34,12 @@
   cursor: pointer;
   padding: 10px 20px;
   text-align: center;
+  word-break: break-all;
+
+  @include media-mobile {
+    @include font(2.5rem, 3rem);
+    padding: 10px 0;
+   }
 
   &:hover {
     background: $hover-navigation-item-background-color

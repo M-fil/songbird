@@ -12,6 +12,8 @@ body {
 
 button, input, select, textarea {
   @include initial-styles-for-elements;
+
+  word-break: break-all;
 }
 
 #root {
@@ -23,10 +25,27 @@ button, input, select, textarea {
 
 #game-wrapper {
   min-height: 100vh;
-  max-width: 1200px;
+  max-width: 1020px;
+
+  @include media-laptop {
+    max-width: 768px;
+  }
+
+  @include media-tablet {
+    max-width: 100%;
+  }
+}
+
+#main-container {
+  padding: 20px;
+
+  @include media-mobile {
+    padding: 10px;
+  }
 }
 
 .game-block {
   background: $game-blocks-background-color;
   border-radius: 10px;
+  word-break: break-all;
 }

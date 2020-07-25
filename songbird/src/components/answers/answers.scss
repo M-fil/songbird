@@ -8,11 +8,31 @@
 
   margin-bottom: 20px;
 
+  @include media-tablet {
+    flex-direction: column;
+    justify-content: initial;
+    align-items: center;
+  }
+
   & > * {
     width: 50%;
+
+    @include media-tablet {
+      width: 80%;
+    }
+
+    @include media-mobile {
+      width: 90%;
+    }
   }
+  
   & > *:not(:last-child) {
     margin-right: 20px;
+
+    @include media-tablet {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
   }
 }
 
@@ -22,6 +42,15 @@
 
   overflow: hidden;
   border: 1px solid $standard-border-color;
+  width: calc(50% + 40px);
+
+  @include media-tablet {
+    width: calc(80% + 40px);
+  }
+
+  @include media-mobile {
+    width: calc(90% + 40px);
+  }
 
   & > * {
     flex-grow: 1;
@@ -29,5 +58,11 @@
 }
 
 .answers__active-answer {
+  @include font(2rem, 2.5rem);
+
   padding: 20px;
+}
+
+.asnwers__no-answer-text  {
+  text-align: center;
 }

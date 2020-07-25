@@ -46,12 +46,11 @@ function App() {
 
   return (
     <div id="game-wrapper">
-      <ResultsBlock score={0} />
       <Header
         score={score}
       />
       {birdsForGame.length && (
-      <main>
+      <main id="main-container">
         <BirdCard
           id={`${birdsForGame[currentBirdIndex].id}-${birdsForGame[currentBirdIndex].name}`}
           imageURL={birdsForGame[currentBirdIndex].image}
@@ -61,7 +60,7 @@ function App() {
         />
         <Answers
           birds={birdsForGame}
-          activeBirdObject={birdsForGame[currentBirdIndex]}
+          activeBirdObject={null}
           correctBirdId={5}
         />
         <button

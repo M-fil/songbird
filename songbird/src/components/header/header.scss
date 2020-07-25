@@ -8,6 +8,10 @@
 
   padding-top: 20px;
   margin-bottom: 20px;
+
+  @include media-tablet {
+    padding: 10px;
+  }
 }
 
 .header__logo-block {
@@ -15,6 +19,11 @@
   justify-content: space-between;
 
   margin-bottom: 10px;
+
+  @include media-mobile {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .header__logo {
@@ -24,6 +33,10 @@
 
   width: 200px;
   height: 55px;
+
+  @include media-mobile {
+    margin-bottom: 10px;
+  }
 }
 
 .header__score {

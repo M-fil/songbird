@@ -19,7 +19,9 @@ function AnswerBirdCard({
       className={`answer-bird-card${colorIndicatorClassName}`}
       data-answer-id={id}
     >
-      <div className="answer-bird-card__correctness-indicator" />
+      <div className="answer-bird-card__indicator-container">
+        <div className="answer-bird-card__correctness-indicator" />
+      </div>
       <div className="answer-bird-card__bird-name">
         {name}
       </div>

@@ -9,6 +9,10 @@
   padding: 10px 20px;
   margin-bottom: 20px;
 
+  @include media-mobile {
+    flex-direction: column;
+  }
+
   & .bird-card__main-info {
     display: flex;
     flex-direction: column;
@@ -16,10 +20,18 @@
     flex-grow: 1;
 
     height: 200px;
+
+    @include media-mobile {
+      width: 100%;
+    }
   }
 
   & .bird-card__image {
     margin-right: 50px;
+
+    @include media-mobile {
+      margin: 0;
+    }
   }
 
   & .bird-card__audio-block {
@@ -36,6 +48,11 @@
   justify-content: space-between;
 
   margin-bottom: 30px;
+
+  @include media-mobile {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .bird-card-short-info__description {
@@ -48,6 +65,11 @@
 
   & .bird-card__name {
     margin: 0;
+  }
+
+  @include media-mobile {
+    margin: 0;
+    width: 100%;
   }
 }
 
@@ -63,10 +85,20 @@
 
 .bird-card__name {
   @include font(3rem, 3.5rem, 700);
+
+  @include media-mobile {
+    text-align: center;
+    margin-top: 10px;
+  }
 }
 
 .bird-card__species {
   @include font(1.8rem, 2rem);
+
+  @include media-mobile {
+    text-align: center;
+    margin-bottom: 20px;
+  }
 }
 
 .bird-card__description {

@@ -34,6 +34,12 @@
   color: $standard-text-color;
 }
 
+@mixin three-dots-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 @mixin standard-button($buttonBackground, $afterBackground) {
   @extend %standard-button-transition;
 
