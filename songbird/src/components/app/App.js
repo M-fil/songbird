@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { useQuery, queryCache } from 'react-query';
+import { useQuery } from 'react-query';
 
 import {
   fetchStatuses,
@@ -25,7 +25,6 @@ function App() {
   });
 
   useEffect(() => {
-    queryCache.prefetchQuery('birds', fetchData);
     if (data) {
       setBirdsForGame(getRandomBirds(data));
     }
