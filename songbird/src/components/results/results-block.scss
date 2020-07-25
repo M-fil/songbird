@@ -31,6 +31,10 @@
   width: 50vmax;
   height: fit-content;
   padding: 20px;
+
+  @include media-tablet {
+    width: 80vmin;
+  }
 }
 
 .result-block__image {
@@ -44,6 +48,10 @@
   margin-bottom: 20px;
   overflow: hidden;
   border-radius: 10px;
+
+  @include media-tablet {
+    width: 100%;
+  }
 }
 
 .results-block__text {
