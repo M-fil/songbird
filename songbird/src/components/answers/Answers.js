@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes, { objectOf } from 'prop-types';
 
 import BirdCard from '../bird-card/BirdCard';
+import AnswerBirdCard from '../answer-bird-card/AnswerBirdCard';
 import {
   mainBlockConstants,
 } from '../../constants/constants';
@@ -22,14 +23,13 @@ function Answers({
     <div className="answers">
       <div className="answers__list">
         {birds.map((bird) => (
-          <BirdCard
+          <AnswerBirdCard
             key={`${bird.name}-${bird.id}`}
             id={`${bird.name}-${bird.id}`}
             imageURL={bird.image}
             name={bird.name}
-            soundURL={bird.audio}
-            description={bird.description}
-            species={bird.species}
+            isClicked={bird.isClicked}
+            correctBirdId={correctBirdId}
           />
         ))}
       </div>
