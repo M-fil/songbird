@@ -1,7 +1,7 @@
 @import "../abstract/mixins.scss";
 @import "../abstract/constants.scss";
 
-#next-bird-button {
+#next-bird-button, #play-again-button {
   @include standard-button(
     $disabled-next-button-background-color, $enabled-next-button-background-color
   );

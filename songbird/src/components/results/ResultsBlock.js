@@ -7,23 +7,29 @@ import {
 } from '../../constants/constants';
 
 const {
-  SCORE_TEXT,
   PLAY_AGAIN_BUTTON_TEXT,
+  FINISH_ROUND_TEXT,
 } = resultsBlockConstants;
 
 function ResultsBlock({ score }) {
   return (
-    <div className="results-block">
-      <div className="results-block__score">
-        {`${SCORE_TEXT(score).bind(resultsBlockConstants)}`}
+    <div className="result-block-overflow">
+      <div className="results-block">
+        <div className="results-block__text">
+          {FINISH_ROUND_TEXT}
+        </div>
+        <div className="results-block__score">
+          {`${resultsBlockConstants.SCORE_TEXT(score)}`}
+        </div>
+        <div className="result-block__image" />
+        <button
+          type="button"
+          id="play-again-button"
+          className="results-block__play-again-button"
+        >
+          {PLAY_AGAIN_BUTTON_TEXT}
+        </button>
       </div>
-      <button
-        type="button"
-        id="play-again-button"
-        className="results-block__play-again-button"
-      >
-        {PLAY_AGAIN_BUTTON_TEXT}
-      </button>
     </div>
   );
 }

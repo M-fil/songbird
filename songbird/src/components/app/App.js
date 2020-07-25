@@ -15,6 +15,7 @@ import BirdCard from '../bird-card/BirdCard';
 import Answers from '../answers/Answers';
 import Loading from '../loading/Loading';
 import ErrorBlock from '../error-block/ErrorBlock';
+import ResultsBlock from '../results/ResultsBlock';
 
 const {
   NEXT_BUTTON_TEXT,
@@ -45,6 +46,7 @@ function App() {
 
   return (
     <div id="game-wrapper">
+      <ResultsBlock score={0} />
       <Header
         score={score}
       />
