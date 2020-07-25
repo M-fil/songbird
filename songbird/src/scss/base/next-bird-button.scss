@@ -1,0 +1,14 @@
+@import "../abstract/mixins.scss";
+@import "../abstract/constants.scss";
+
+#next-bird-button {
+  @include standard-button(
+    $disabled-next-button-background-color, $enabled-next-button-background-color
+  );
+  @include font(2.5rem, 3rem);
+
+  border: 2px solid $standard-border-color;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px 0;
+}

@@ -1,7 +1,7 @@
 import './bird-card.scss';
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { func } from 'prop-types';
 import {
   mainBlockConstants,
   urls,
@@ -14,6 +14,19 @@ const {
 const {
   DEFAUL_BIRD_IMAGE_URL,
 } = urls;
+
+function AudioBlock({ soundURL }) {
+  return (
+    <audio
+      className="bird-card__audio"
+      controls
+    >
+      <track kind="captions" />
+      <source src={soundURL} type="audio/mpeg" />
+      {AUDIO_IS_NOT_SUPPORTED}
+    </audio>
+  );
+}
 
 function BirdCard({
   id,
@@ -31,25 +44,28 @@ function BirdCard({
       className={`bird-card${currentBirdCardClassName}`}
       data-bird-id={`${name}-${id}`}
     >
-      <div
-        className="bird-card__image"
-        style={{
-          background: `url(${imageURL})`,
-        }}
-      />
-      <div className="bird-card__main-info">
-        <h3 className="bird-card__name">{name}</h3>
-        {!isCurrentBird && <div className="bird-card__species">{species}</div>}
-        <div className="bird-card__audio-block">
-          <audio
-            className="bird-card__audio"
-            controls
-          >
-            <track kind="captions" />
-            <source src={soundURL} type="audio/mpeg" />
-            {AUDIO_IS_NOT_SUPPORTED}
-          </audio>
+      <div className="bird-card-short-info">
+        <div
+          className="bird-card__image"
+          style={{
+            background: `url(${imageURL})`,
+          }}
+        />
+        <div className="bird-card-short-info__description">
+          <div className="bird-card-short-info__personal">
+            {!isCurrentBird && <h3 className="bird-card__name">{name}</h3>}
+            {!isCurrentBird && <div className="bird-card__species">{species}</div>}
+          </div>
+          {!isCurrentBird && <AudioBlock soundURL={soundURL} />}
         </div>
+      </div>
+      <div className="bird-card__main-info">
+        {isCurrentBird && <h3 className="bird-card__name">{name}</h3>}
+        {isCurrentBird && (
+        <div className="bird-card__audio-block">
+          <AudioBlock soundURL={soundURL} />
+        </div>
+        )}
       </div>
       {!isCurrentBird && <div className="bird-card__description">{description}</div>}
     </div>

@@ -41,10 +41,13 @@
   position:relative;
   z-index: 1;
   background: $buttonBackground;
+  overflow: hidden;
 
 
   &:not(:disabled):after {
     @extend %standard-button-transition;
+
+    content: '';
 
     display: block;
     position: absolute;
@@ -55,7 +58,6 @@
     margin: auto;
     width: 100%;
     height: 1px;
-    content: '.';
     color: transparent;
     background: $afterBackground;
     visibility: none;
@@ -66,7 +68,7 @@
   &:hover::after {
     opacity: 1;
     visibility: visible;
-    height: 100%;
+    height: 100%
   }
 
   &:disabled {

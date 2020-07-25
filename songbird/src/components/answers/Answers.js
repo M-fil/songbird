@@ -9,7 +9,6 @@ import {
 } from '../../constants/constants';
 
 const {
-  NEXT_BUTTON_TEXT,
   NO_ASNWER_TEXT,
 } = mainBlockConstants;
 
@@ -17,7 +16,6 @@ function Answers({
   birds,
   activeBirdObject,
   correctBirdId,
-  nextBirdCardHandler,
 }) {
   return (
     <div className="answers">
@@ -45,15 +43,6 @@ function Answers({
           />
         ) : <div className="asnwers__no-answer-text">{NO_ASNWER_TEXT}</div>}
       </div>
-      <button
-        type="button"
-        id="next-bird-button"
-        className="answers__next-bird-button"
-        onClick={nextBirdCardHandler}
-        disabled={activeBirdObject !== correctBirdId}
-      >
-        {NEXT_BUTTON_TEXT}
-      </button>
     </div>
   );
 }
@@ -64,7 +53,6 @@ Answers.propTypes = {
   birds: PropTypes.arrayOf(objectOf(birdObjectPropType)).isRequired,
   activeBirdObject: PropTypes.objectOf(birdObjectPropType).isRequired,
   correctBirdId: PropTypes.number.isRequired,
-  nextBirdCardHandler: PropTypes.func.isRequired,
 };
 
 export default Answers;

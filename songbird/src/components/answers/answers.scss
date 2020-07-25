@@ -2,8 +2,32 @@
 @import '../../scss/abstract/mixins.scss';
 @import '../../scss/abstract/constants.scss';
 
-#next-bird-button {
-  @include standard-button(
-    $disabled-next-button-background-color, $enabled-next-button-background-color
-  );
+.answers {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+
+  & > * {
+    width: 50%;
+  }
+  & > *:not(:last-child) {
+    margin-right: 20px;
+  }
+}
+
+.answers__list {
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+  border: 1px solid $standard-border-color;
+
+  & > * {
+    flex-grow: 1;
+  }
+}
+
+.answers__active-answer {
+  padding: 20px;
 }

@@ -1,0 +1,44 @@
+@import '../../scss/abstract/mixins.scss';
+@import '../../scss/abstract/constants.scss';
+@import '../../scss/abstract/placeholders.scss';
+
+.answer-bird-card {
+  @extend %standard-button-transition;
+
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+  border-bottom: 1px solid $standard-border-color;
+  padding: 0 20px;
+
+  &:hover {
+    background: $standard-hover-item-background-color;
+  }
+
+  &_wrong {
+    & .answer-bird-card__correctness-indicator {
+      background-color: $wrong-answer-collor;
+    }
+  }
+
+  &_correct {
+    & .answer-bird-card__correctness-indicator {
+      background-color: $correct-answer-collor;
+    }
+  }
+}
+
+.answer-bird-card__correctness-indicator {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 5px solid $standard-border-color;
+  background: transparent;
+
+  margin-right: 20px;
+}
+
+.answer-bird-card__bird-name {
+  @include font(2.5rem, 3rem);
+}

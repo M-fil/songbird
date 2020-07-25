@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 
 import {
   fetchStatuses,
+  mainBlockConstants,
 } from '../../constants/constants';
 import {
   getRandomBirds,
@@ -14,6 +15,10 @@ import BirdCard from '../bird-card/BirdCard';
 import Answers from '../answers/Answers';
 import Loading from '../loading/Loading';
 import ErrorBlock from '../error-block/ErrorBlock';
+
+const {
+  NEXT_BUTTON_TEXT,
+} = mainBlockConstants;
 
 function App() {
   const [score, setScore] = useState(0);
@@ -56,8 +61,16 @@ function App() {
           birds={birdsForGame}
           activeBirdObject={birdsForGame[currentBirdIndex]}
           correctBirdId={5}
-          nextBirdCardHandler={() => {}}
         />
+        <button
+          type="button"
+          id="next-bird-button"
+          className="answers__next-bird-button"
+          onClick={() => {}}
+          disabled={false}
+        >
+          {NEXT_BUTTON_TEXT}
+        </button>
       </main>
       )}
     </div>

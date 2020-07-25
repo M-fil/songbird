@@ -7,11 +7,14 @@
   justify-content: space-between;
 
   padding-top: 20px;
+  margin-bottom: 20px;
 }
 
 .header__logo-block {
   display: flex;
   justify-content: space-between;
+
+  margin-bottom: 10px;
 }
 
 .header__logo {
@@ -24,5 +27,5 @@
 }
 
 .header__score {
-  @include font(2rem, 2.5rem);
+  @include font(3rem, 3.5rem);
 }
