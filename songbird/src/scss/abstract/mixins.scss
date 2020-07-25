@@ -27,6 +27,12 @@
   @media (max-width: $mobile-small-width) { @content; }
 }
 
+@mixin initial-styles-for-elements {
+  font-family: 'Roboto', sans-serif;
+  font-size: 10px;
+  line-height: 10px;
+  color: $standard-text-color;
+}
 
 @mixin standard-button($buttonBackground, $afterBackground) {
   @extend %standard-button-transition;

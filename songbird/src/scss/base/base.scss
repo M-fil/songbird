@@ -1,0 +1,15 @@
+@import "../abstract/constants.scss";
+@import "../abstract/mixins.scss";
+
+html {
+  @include initial-styles-for-elements;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+button, input, select, textarea {
+  @include initial-styles-for-elements;
+}
