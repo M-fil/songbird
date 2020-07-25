@@ -1,0 +1,9 @@
+@import '../../scss/abstract/placeholders.scss';
+@import '../../scss/abstract/mixins.scss';
+@import '../../scss/abstract/constants.scss';
+
+#next-bird-button {
+  @include standard-button(
+    $disabled-next-button-background-color, $enabled-next-button-background-color
+  );
+}

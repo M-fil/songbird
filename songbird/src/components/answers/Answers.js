@@ -1,4 +1,4 @@
-import './answers-list.scss';
+import './answers.scss';
 import React from 'react';
 import PropTypes, { objectOf } from 'prop-types';
 
