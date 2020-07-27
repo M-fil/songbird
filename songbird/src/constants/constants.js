@@ -1,5 +1,6 @@
 import CORRECT_SOUND_PATH from '../assets/audio/correct.mp3'
 import ERROR_SOUND_PATH from '../assets/audio/error.mp3';
+import WIN_SOUND_PATH from '../assets/audio/win.mp3';
 import DEFAUL_BIRD_IMAGE_URL from '../assets/images/default-bird-image.png';
 
 const urls = {
@@ -7,6 +8,7 @@ const urls = {
   BIRDS_INFO_URL: 'https://raw.githubusercontent.com/M-fil/tasks/master/tasks/songbird/birds.json',
   ERROR_SOUND_PATH,
   CORRECT_SOUND_PATH,
+  WIN_SOUND_PATH,
 };
 
 const headerConstants = {
@@ -27,10 +29,12 @@ const mainBlockConstants = {
   NEXT_BUTTON_TEXT: 'Дальше',
   NO_ASNWER_TEXT: 'Послушайте плеер. Выберите птицу из списка.',
   UNGUESSED_BIRD_NAME_TEXT: (repeatTime = 5) => '*'.repeat(repeatTime),
+  MAX_DESCRITPTION_LENGTH: 250,
 };
 
 const resultsBlockConstants = {
   MAX_SCORE_FOR_SINGLE_ANSWER: 5,
+  TYPES_OF_BIRDS_NUMBER: Object.values(listOfBirds).length,
   MAX_SCORE_FOR_GAME() {
     return (Object.values(listOfBirds).length - 1) * this.MAX_SCORE_FOR_SINGLE_ANSWER;
   },

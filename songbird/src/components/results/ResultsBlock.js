@@ -4,14 +4,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   resultsBlockConstants,
+  urls,
 } from '../../constants/constants';
+import playAudio from '../../utils/audio';
 
 const {
   PLAY_AGAIN_BUTTON_TEXT,
   FINISH_ROUND_TEXT,
 } = resultsBlockConstants;
 
-function ResultsBlock({ score }) {
+const {
+  WIN_SOUND_PATH,
+} = urls;
+
+function ResultsBlock({ score, playAgainHandler }) {
+  playAudio(WIN_SOUND_PATH, new Audio());
   return (
     <div className="result-block-overflow">
       <div className="results-block">
@@ -26,6 +33,7 @@ function ResultsBlock({ score }) {
           type="button"
           id="play-again-button"
           className="results-block__play-again-button"
+          onClick={playAgainHandler}
         >
           {PLAY_AGAIN_BUTTON_TEXT}
         </button>
@@ -36,6 +44,7 @@ function ResultsBlock({ score }) {
 
 ResultsBlock.propTypes = {
   score: PropTypes.number.isRequired,
+  playAgainHandler: PropTypes.func.isRequired,
 };
 
 export default ResultsBlock;

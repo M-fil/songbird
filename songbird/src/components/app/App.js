@@ -1,5 +1,5 @@
 import React, {
-  useEffect, useCallback, useState, useReducer,
+  useEffect, useCallback, useReducer,
 } from 'react';
 import { useQuery } from 'react-query';
 
@@ -11,9 +11,9 @@ import {
   fetchStatuses,
   mainBlockConstants,
   urls,
+  resultsBlockConstants,
 } from '../../constants/constants';
 import { getRandomBirds } from '../../utils/random';
-import shuffle from '../../utils/shuffle';
 import getBirdsInfo from '../../service/service';
 import playAudio from '../../utils/audio';
 
@@ -33,10 +33,14 @@ const {
   INCREMENT_QUESTION_INDICATOR,
   RESET_QUESTION_INDICATOR,
   RESET_BIRD_INDEX,
+  RESET_MAIN_SCORE,
   UPDATE_MAIN_SCORE,
   UPDATE_BIRDS_LIST,
   UPDATE_BIRD_ANSWERS,
   UPDATE_EVENT_DATA,
+  CHANGE_IS_CLICKED_OF_BIRD_ANSWER,
+  DECREMENT_CURRENT_SCORE,
+  RESET_CURRENT_SCORE,
 } = actionTypes;
 
 const {
@@ -44,25 +48,39 @@ const {
   CORRECT_SOUND_PATH,
 } = urls;
 
+const {
+  TYPES_OF_BIRDS_NUMBER,
+} = resultsBlockConstants;
+
 function App() {
   const audio = new Audio();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const fetchData = useCallback(getBirdsInfo, []);
+  const fetchData = useCallback(getBirdsInfo, [state.allData]);
   const { status, data, error } = useQuery('birds', fetchData, {
     retry: 1,
   });
 
+  useEffect(() => {
+    if (data) {
+      const { currentQuestionIndicator } = state;
+      dispatch({ type: UPDATE_BIRDS_LIST, payload: { data, birds: getRandomBirds(data) } });
+      dispatch({ type: UPDATE_BIRD_ANSWERS, payload: data[currentQuestionIndicator] });
+    }
+  }, [data]);
+
   const answerEventClick = (event) => {
     const target = event.target.closest('[data-answer-id]');
+    const answersHTML = document.querySelectorAll('[data-answer-id]');
+    const elementWithExtraClass = Array.from(answersHTML)
+      .find((item) => item.classList.contains('answer-bird-card_correct'));
 
-    if (target) {
+    if (target && !elementWithExtraClass && !target.classList.contains('answer-bird-card_wrong')) {
       const { birds, currentBirdIndex } = state;
       const clickedId = target.dataset.answerId;
       const correctId = `${birds[currentBirdIndex].name}-${birds[currentBirdIndex].id}`;
-      console.log('clickedId', clickedId);
-      const activeBirdObject = birds.find((bird) => `${bird.name}-${bird.id}` === clickedId);
-      console.log('activeBirdObject', activeBirdObject);
-      console.log('correctId', correctId);
+      const activeBirdObject = data
+        .reduce((acc, cur) => acc.concat(cur))
+        .find((bird) => `${bird.name}-${bird.id}` === clickedId);
 
       if (clickedId === correctId) {
         playAudio(CORRECT_SOUND_PATH, audio);
@@ -70,20 +88,45 @@ function App() {
           type: UPDATE_EVENT_DATA,
           payload: { clickedId, activeBirdObject },
         });
-        dispatch({ type: INCREMENT_QUESTION_INDICATOR });
+        dispatch({ type: UPDATE_MAIN_SCORE });
+        dispatch({ type: RESET_CURRENT_SCORE });
       } else {
         playAudio(ERROR_SOUND_PATH, audio);
+        dispatch({
+          type: UPDATE_EVENT_DATA,
+          payload: { clickedId, activeBirdObject },
+        });
+        dispatch({ type: DECREMENT_CURRENT_SCORE });
       }
+
+      dispatch({ type: CHANGE_IS_CLICKED_OF_BIRD_ANSWER });
     }
   };
 
-  useEffect(() => {
-    if (data) {
-      const { currentQuestionIndicator } = state;
-      dispatch({ type: UPDATE_BIRDS_LIST, payload: { data, birds: getRandomBirds(data) } });
-      dispatch({ type: UPDATE_BIRD_ANSWERS, payload: shuffle() });
+  const nextLevelHandler = () => {
+    dispatch({ type: INCREMENT_BIRD_INDEX });
+    dispatch({ type: INCREMENT_QUESTION_INDICATOR });
+    if (data && data[state.currentQuestionIndicator + 1]) {
+      dispatch({
+        type: UPDATE_BIRD_ANSWERS,
+        payload: data[state.currentQuestionIndicator + 1],
+      });
+      dispatch({
+        type: UPDATE_EVENT_DATA,
+        payload: { clickedId: '', activeBirdObject: null },
+      });
     }
-  }, [data]);
+  };
+
+  const playAgainHandler = () => {
+    dispatch({ type: RESET_BIRD_INDEX });
+    dispatch({ type: RESET_CURRENT_SCORE });
+    dispatch({ type: RESET_QUESTION_INDICATOR });
+    dispatch({ type: RESET_MAIN_SCORE });
+
+    dispatch({ type: UPDATE_BIRDS_LIST, payload: { data, birds: getRandomBirds(data) } });
+    dispatch({ type: UPDATE_BIRD_ANSWERS, payload: data[0] });
+  };
 
   if (status === fetchStatuses.LOADING) {
     return <Loading />;
@@ -106,6 +149,13 @@ function App() {
 
   return (
     <div id="game-wrapper">
+      {currentQuestionIndicator === (TYPES_OF_BIRDS_NUMBER - 1)
+        && (
+        <ResultsBlock
+          score={mainScore}
+          playAgainHandler={playAgainHandler}
+        />
+        )}
       <Header
         score={mainScore}
         currentQuestionIndicator={currentQuestionIndicator}
@@ -117,20 +167,20 @@ function App() {
           imageURL={birds[currentBirdIndex].image}
           name={birds[currentBirdIndex].name}
           soundURL={birds[currentBirdIndex].audio}
+          isGuessed={!!isGuessed}
           isCurrentBird
-          isGuessed={isGuessed}
         />
         <Answers
           birdAnswers={birdAnswers}
           activeBirdObject={eventData.activeBirdObject}
-          correctBirdId={birds[currentBirdIndex]}
+          correctBirdId={`${birds[currentBirdIndex].name}-${birds[currentBirdIndex].id}`}
           answerEventClick={answerEventClick}
         />
         <button
           type="button"
           id="next-bird-button"
           className="answers__next-bird-button"
-          onClick={() => {}}
+          onClick={nextLevelHandler}
           disabled={!isGuessed}
         >
           {NEXT_BUTTON_TEXT}

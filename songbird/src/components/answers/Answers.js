@@ -14,11 +14,10 @@ const {
 
 function Answers({
   birdAnswers,
-  activeBirdObject,
+  activeBirdObject = null,
   correctBirdId,
   answerEventClick,
 }) {
-  console.log('activeBirdObject', activeBirdObject);
   return (
     <div className="answers">
       <div
@@ -29,7 +28,6 @@ function Answers({
           <AnswerBirdCard
             key={`${bird.name}-${bird.id}`}
             id={`${bird.name}-${bird.id}`}
-            imageURL={bird.image}
             name={bird.name}
             isClicked={bird.isClicked}
             correctBirdId={correctBirdId}
@@ -56,9 +54,13 @@ const birdObjectPropType = PropTypes.oneOfType([PropTypes.string, PropTypes.numb
 
 Answers.propTypes = {
   birdAnswers: PropTypes.arrayOf(objectOf(birdObjectPropType)).isRequired,
-  activeBirdObject: PropTypes.objectOf(birdObjectPropType).isRequired,
-  correctBirdId: PropTypes.number.isRequired,
+  activeBirdObject: PropTypes.objectOf(birdObjectPropType),
+  correctBirdId: PropTypes.string.isRequired,
   answerEventClick: PropTypes.func.isRequired,
+};
+
+Answers.defaultProps = {
+  activeBirdObject: null,
 };
 
 export default Answers;

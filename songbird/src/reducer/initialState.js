@@ -5,9 +5,10 @@ const initialState = {
   currentBirdIndex: 0,
   currentQuestionIndicator: 0,
   mainScore: 0,
+  currentScore: 5,
   eventData: {
     clickedId: '',
-    activeBirdObject: '',
+    activeBirdObject: null,
   }
 };
 

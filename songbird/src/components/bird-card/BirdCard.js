@@ -10,6 +10,7 @@ import {
 const {
   AUDIO_IS_NOT_SUPPORTED,
   UNGUESSED_BIRD_NAME_TEXT,
+  MAX_DESCRITPTION_LENGTH,
 } = mainBlockConstants;
 
 const {
@@ -37,7 +38,7 @@ function BirdCard({
   description = '',
   species = '',
   isCurrentBird = false,
-  isGuessed,
+  isGuessed = false,
 }) {
   const currentBirdCardClassName = isCurrentBird ? ' bird-card_current game-block' : '';
 
@@ -64,7 +65,7 @@ function BirdCard({
       <div className="bird-card__main-info">
         {isCurrentBird && (
         <h3 className="bird-card__name">
-          {isGuessed ? name : UNGUESSED_BIRD_NAME_TEXT()}
+          {!isGuessed ? name : UNGUESSED_BIRD_NAME_TEXT()}
         </h3>
         )}
         {isCurrentBird && (
@@ -73,10 +74,21 @@ function BirdCard({
         </div>
         )}
       </div>
-      {!isCurrentBird && <div className="bird-card__description">{description}</div>}
+      {!isCurrentBird && (
+      <div className="bird-card__description">
+        {description.length > MAX_DESCRITPTION_LENGTH 
+          ? `${description.slice(0, MAX_DESCRITPTION_LENGTH)}...`
+          : description
+        }
+      </div>
+      )}
     </div>
   );
 }
+
+AudioBlock.propTypes = {
+  soundURL: PropTypes.string.isRequired,
+};
 
 BirdCard.propTypes = {
   id: PropTypes.string.isRequired,
@@ -86,7 +98,7 @@ BirdCard.propTypes = {
   description: PropTypes.string,
   species: PropTypes.string,
   isCurrentBird: PropTypes.bool,
-  isGuessed: PropTypes.bool.isRequired,
+  isGuessed: PropTypes.bool,
 };
 
 BirdCard.defaultProps = {
@@ -94,6 +106,7 @@ BirdCard.defaultProps = {
   description: '',
   species: '',
   isCurrentBird: false,
+  isGuessed: false,
 };
 
 export default BirdCard;

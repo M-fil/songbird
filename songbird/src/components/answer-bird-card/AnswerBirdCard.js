@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 function AnswerBirdCard({
   id, name, isClicked, correctBirdId,
 }) {
+  console.log(id, isClicked)
   let colorIndicatorClassName = '';
   if (isClicked) {
     colorIndicatorClassName = ' answer-bird-card_wrong';
