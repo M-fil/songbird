@@ -3,9 +3,12 @@ import actionTypes from './actions';
 const {
   INCREMENT_BIRD_INDEX,
   RESET_BIRD_INDEX,
+  RESET_QUESTION_INDICATOR,
   UPDATE_MAIN_SCORE,
   UPDATE_BIRDS_LIST,
   UPDATE_BIRD_ANSWERS,
+  UPDATE_EVENT_DATA,
+  INCREMENT_QUESTION_INDICATOR,
 } = actionTypes;
 
 const reducer = (state, action) => {
@@ -28,12 +31,31 @@ const reducer = (state, action) => {
     case UPDATE_BIRDS_LIST:
       return {
         ...state,
-        birds: action.payload,
+        allData: action.payload.data,
+        birds: action.payload.birds,
       };
     case UPDATE_BIRD_ANSWERS:
       return {
         ...state,
         birdAnswers: action.payload,
+      };
+    case UPDATE_EVENT_DATA:
+      return {
+        ...state,
+        eventData: {
+          clickedId: action.payload.clickedId,
+          activeBirdObject: action.payload.activeBirdObject,
+        },
+      };
+    case INCREMENT_QUESTION_INDICATOR:
+      return {
+        ...state,
+        currentQuestionIndicator: state.currentQuestionIndicator + 1,
+      };
+    case RESET_QUESTION_INDICATOR:
+      return {
+        ...state,
+        currentQuestionIndicator: 0,
       };
     default:
       return state;

@@ -1,5 +1,5 @@
 const urls = {
-  DEFAUL_BIRD_IMAGE_URL: './src/assets/images/default-bird-image.png',
+  DEFAUL_BIRD_IMAGE_URL: 'src/assets/images/default-bird-image.png',
   BIRDS_INFO_URL: 'https://raw.githubusercontent.com/M-fil/tasks/master/tasks/songbird/birds.json',
 };
 
@@ -20,6 +20,7 @@ const mainBlockConstants = {
   AUDIO_IS_NOT_SUPPORTED: 'Тег audio не поддерживается вашим браузером.',
   NEXT_BUTTON_TEXT: 'Дальше',
   NO_ASNWER_TEXT: 'Послушайте плеер. Выберите птицу из списка.',
+  UNGUESSED_BIRD_NAME_TEXT: (repeatTime = 5) => '*'.repeat(repeatTime),
 };
 
 const resultsBlockConstants = {

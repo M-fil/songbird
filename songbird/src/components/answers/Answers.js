@@ -13,14 +13,19 @@ const {
 } = mainBlockConstants;
 
 function Answers({
-  birds,
+  birdAnswers,
   activeBirdObject,
   correctBirdId,
+  answerEventClick,
 }) {
+  console.log('activeBirdObject', activeBirdObject);
   return (
     <div className="answers">
-      <div className="answers__list game-block">
-        {birds.map((bird) => (
+      <div
+        className="answers__list game-block"
+        onClick={answerEventClick}
+      >
+        {birdAnswers.map((bird) => (
           <AnswerBirdCard
             key={`${bird.name}-${bird.id}`}
             id={`${bird.name}-${bird.id}`}
@@ -50,9 +55,10 @@ function Answers({
 const birdObjectPropType = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
 
 Answers.propTypes = {
-  birds: PropTypes.arrayOf(objectOf(birdObjectPropType)).isRequired,
+  birdAnswers: PropTypes.arrayOf(objectOf(birdObjectPropType)).isRequired,
   activeBirdObject: PropTypes.objectOf(birdObjectPropType).isRequired,
   correctBirdId: PropTypes.number.isRequired,
+  answerEventClick: PropTypes.func.isRequired,
 };
 
 export default Answers;

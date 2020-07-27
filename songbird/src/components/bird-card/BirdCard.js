@@ -1,7 +1,7 @@
 import './bird-card.scss';
 
 import React from 'react';
-import PropTypes, { func } from 'prop-types';
+import PropTypes from 'prop-types';
 import {
   mainBlockConstants,
   urls,
@@ -9,6 +9,7 @@ import {
 
 const {
   AUDIO_IS_NOT_SUPPORTED,
+  UNGUESSED_BIRD_NAME_TEXT,
 } = mainBlockConstants;
 
 const {
@@ -35,7 +36,8 @@ function BirdCard({
   soundURL,
   description = '',
   species = '',
-  isCurrentBird,
+  isCurrentBird = false,
+  isGuessed,
 }) {
   const currentBirdCardClassName = isCurrentBird ? ' bird-card_current game-block' : '';
 
@@ -48,7 +50,7 @@ function BirdCard({
         <div
           className="bird-card__image"
           style={{
-            background: `url(${imageURL})`,
+            backgroundImage: `url(${(isGuessed || !isCurrentBird) ? imageURL : DEFAUL_BIRD_IMAGE_URL})`,
           }}
         />
         <div className="bird-card-short-info__description">
@@ -60,7 +62,11 @@ function BirdCard({
         </div>
       </div>
       <div className="bird-card__main-info">
-        {isCurrentBird && <h3 className="bird-card__name">{name}</h3>}
+        {isCurrentBird && (
+        <h3 className="bird-card__name">
+          {isGuessed ? name : UNGUESSED_BIRD_NAME_TEXT()}
+        </h3>
+        )}
         {isCurrentBird && (
         <div className="bird-card__audio-block">
           <AudioBlock soundURL={soundURL} />
@@ -80,6 +86,7 @@ BirdCard.propTypes = {
   description: PropTypes.string,
   species: PropTypes.string,
   isCurrentBird: PropTypes.bool,
+  isGuessed: PropTypes.bool.isRequired,
 };
 
 BirdCard.defaultProps = {

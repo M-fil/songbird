@@ -12,7 +12,7 @@ const {
   SCORE_TEXT,
 } = headerConstants;
 
-function Header({ score }) {
+function Header({ score, currentQuestionIndicator }) {
   return (
     <header className="header">
       <div className="header__logo-block">
@@ -21,13 +21,14 @@ function Header({ score }) {
           {`${SCORE_TEXT}: ${score}`}
         </div>
       </div>
-      <Navigation />
+      <Navigation currentQuestionIndicator={currentQuestionIndicator} />
     </header>
   );
 }
 
 Header.propTypes = {
   score: PropTypes.number.isRequired,
+  currentQuestionIndicator: PropTypes.number.isRequired,
 };
 
 export default Header;
