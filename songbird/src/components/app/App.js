@@ -10,10 +10,12 @@ import actionTypes from '../../reducer/actions';
 import {
   fetchStatuses,
   mainBlockConstants,
+  urls,
 } from '../../constants/constants';
 import { getRandomBirds } from '../../utils/random';
 import shuffle from '../../utils/shuffle';
 import getBirdsInfo from '../../service/service';
+import playAudio from '../../utils/audio';
 
 import Header from '../header/Header';
 import BirdCard from '../bird-card/BirdCard';
@@ -37,7 +39,13 @@ const {
   UPDATE_EVENT_DATA,
 } = actionTypes;
 
+const {
+  ERROR_SOUND_PATH,
+  CORRECT_SOUND_PATH,
+} = urls;
+
 function App() {
+  const audio = new Audio();
   const [state, dispatch] = useReducer(reducer, initialState);
   const fetchData = useCallback(getBirdsInfo, []);
   const { status, data, error } = useQuery('birds', fetchData, {
@@ -57,20 +65,23 @@ function App() {
       console.log('correctId', correctId);
 
       if (clickedId === correctId) {
+        playAudio(CORRECT_SOUND_PATH, audio);
         dispatch({
           type: UPDATE_EVENT_DATA,
           payload: { clickedId, activeBirdObject },
         });
         dispatch({ type: INCREMENT_QUESTION_INDICATOR });
+      } else {
+        playAudio(ERROR_SOUND_PATH, audio);
       }
     }
-  }
+  };
 
   useEffect(() => {
     if (data) {
       const { currentQuestionIndicator } = state;
       dispatch({ type: UPDATE_BIRDS_LIST, payload: { data, birds: getRandomBirds(data) } });
-      dispatch({ type: UPDATE_BIRD_ANSWERS, payload: shuffle(data[currentQuestionIndicator]) });
+      dispatch({ type: UPDATE_BIRD_ANSWERS, payload: shuffle() });
     }
   }, [data]);
 
@@ -90,8 +101,8 @@ function App() {
     currentQuestionIndicator,
     eventData,
   } = state;
-  const isGuessed = (birds && birds[currentBirdIndex]) &&
-    (`${birds[currentBirdIndex].name}-${birds[currentBirdIndex].id}`) === eventData.clickedId
+  const isGuessed = (birds && birds[currentBirdIndex])
+    && (`${birds[currentBirdIndex].name}-${birds[currentBirdIndex].id}`) === eventData.clickedId;
 
   return (
     <div id="game-wrapper">
