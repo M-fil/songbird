@@ -1,6 +1,10 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, {
+  useEffect, useCallback, useState, useReducer,
+} from 'react';
 import { useQuery } from 'react-query';
 
+import initialState from '../../reducer/initialState';
+import reducer from '../../reducer/reducer';
 import {
   fetchStatuses,
   mainBlockConstants,
@@ -22,6 +26,7 @@ const {
 } = mainBlockConstants;
 
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [score, setScore] = useState(0);
   const [birdsForGame, setBirdsForGame] = useState([]);
   const [currentBirdIndex, setCurrentBirdIndex] = useState(0);
