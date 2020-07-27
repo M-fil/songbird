@@ -1,4 +1,4 @@
-import CORRECT_SOUND_PATH from '../assets/audio/correct.mp3'
+import CORRECT_SOUND_PATH from '../assets/audio/correct.mp3';
 import ERROR_SOUND_PATH from '../assets/audio/error.mp3';
 import WIN_SOUND_PATH from '../assets/audio/win.mp3';
 import DEFAUL_BIRD_IMAGE_URL from '../assets/images/default-bird-image.png';

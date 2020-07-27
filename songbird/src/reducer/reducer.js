@@ -89,7 +89,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         currentScore: 5,
-      }
+      };
     default:
       return state;
   }

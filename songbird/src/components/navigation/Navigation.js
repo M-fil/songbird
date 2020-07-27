@@ -26,7 +26,7 @@ function Navigation({ currentQuestionIndicator }) {
   );
 }
 
-Navigation.proprTypes = {
+Navigation.propTypes = {
   currentQuestionIndicator: PropTypes.number.isRequired,
 };
 

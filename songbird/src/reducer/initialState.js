@@ -9,7 +9,7 @@ const initialState = {
   eventData: {
     clickedId: '',
     activeBirdObject: null,
-  }
+  },
 };
 
 export default initialState;

@@ -76,10 +76,9 @@ function BirdCard({
       </div>
       {!isCurrentBird && (
       <div className="bird-card__description">
-        {description.length > MAX_DESCRITPTION_LENGTH 
+        {description.length > MAX_DESCRITPTION_LENGTH
           ? `${description.slice(0, MAX_DESCRITPTION_LENGTH)}...`
-          : description
-        }
+          : description}
       </div>
       )}
     </div>
