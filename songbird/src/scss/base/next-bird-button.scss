@@ -7,8 +7,23 @@
   );
   @include font(2.5rem, 3rem);
 
+  position: relative;
+
   border: 2px solid $standard-border-color;
   border-radius: 5px;
   width: 100%;
   padding: 10px 0;
+}
+
+#next-bird-button:disabled {
+  &::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: $standard-disbaled-button-background-color;
+  }
 }

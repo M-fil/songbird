@@ -68,7 +68,7 @@ function App() {
           id="next-bird-button"
           className="answers__next-bird-button"
           onClick={() => {}}
-          disabled={false}
+          disabled
         >
           {NEXT_BUTTON_TEXT}
         </button>
