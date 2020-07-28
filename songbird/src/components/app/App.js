@@ -154,6 +154,8 @@ function App() {
         <ResultsBlock
           score={mainScore}
           playAgainHandler={playAgainHandler}
+          birds={birds}
+          isZeroMistakes={mainScore === resultsBlockConstants.MAX_SCORE_FOR_GAME()}
         />
         )}
       <Header

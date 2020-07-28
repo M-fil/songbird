@@ -43,6 +43,10 @@ const resultsBlockConstants = {
   },
   PLAY_AGAIN_BUTTON_TEXT: 'Играть снова',
   FINISH_ROUND_TEXT: 'Раунд завершен!',
+  ZERO_MISTAKES_TEXT: 'Урааа! Вы угадали всех птиц без единной ошибки!',
+  GET_CERTIFICATE_TEXT: 'Забирайте сертификат знатока птичьих голосов!',
+  DOWNLOAD_CERTIFICATE_BUTTON_TEXT: 'Скачать Сертификат',
+  CERTIFICATE_DATA_TEXT: (score, birdsList) => `Поздравляем! Вы теперь настоящий знаток птичьих голосов!\nВы набрали ${score} баллов из ${resultsBlockConstants.MAX_SCORE_FOR_GAME()}.\n\nВы изуличи голоса следущих птиц:\n${birdsList}\n\nСледите за обновлениями приложения SongBird здесь: https://github.com/M-fil/songbird`,
 };
 
 const fetchStatuses = {

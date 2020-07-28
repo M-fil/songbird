@@ -1,6 +1,6 @@
 import './bird-card.scss';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
   mainBlockConstants,
@@ -10,16 +10,26 @@ import {
 const {
   AUDIO_IS_NOT_SUPPORTED,
   UNGUESSED_BIRD_NAME_TEXT,
-  MAX_DESCRITPTION_LENGTH,
 } = mainBlockConstants;
 
 const {
   DEFAUL_BIRD_IMAGE_URL,
 } = urls;
 
-function AudioBlock({ soundURL }) {
+function AudioBlock({ soundURL, isGuessed }) {
+  const audioRef = useRef(null);
+  useEffect(() => {
+    if (isGuessed) {
+      audioRef.current.pause();
+    }
+
+    audioRef.current.pause();
+    audioRef.current.load();
+  }, [soundURL, isGuessed]);
+
   return (
     <audio
+      ref={audioRef}
       className="bird-card__audio"
       controls
     >
@@ -59,7 +69,7 @@ function BirdCard({
             {!isCurrentBird && <h3 className="bird-card__name">{name}</h3>}
             {!isCurrentBird && <div className="bird-card__species">{species}</div>}
           </div>
-          {!isCurrentBird && <AudioBlock soundURL={soundURL} />}
+          {!isCurrentBird && <AudioBlock soundURL={soundURL} isGuessed={isGuessed} />}
         </div>
       </div>
       <div className="bird-card__main-info">
@@ -69,16 +79,12 @@ function BirdCard({
         </h3>
         )}
         {isCurrentBird && (
-        <div className="bird-card__audio-block">
-          <AudioBlock soundURL={soundURL} />
-        </div>
+          <AudioBlock soundURL={soundURL} isGuessed={isGuessed} />
         )}
       </div>
       {!isCurrentBird && (
       <div className="bird-card__description">
-        {description.length > MAX_DESCRITPTION_LENGTH
-          ? `${description.slice(0, MAX_DESCRITPTION_LENGTH)}...`
-          : description}
+        {description}
       </div>
       )}
     </div>
@@ -87,6 +93,7 @@ function BirdCard({
 
 AudioBlock.propTypes = {
   soundURL: PropTypes.string.isRequired,
+  isGuessed: PropTypes.bool.isRequired,
 };
 
 BirdCard.propTypes = {
