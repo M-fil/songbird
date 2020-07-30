@@ -22,7 +22,6 @@ function AudioBlock({ soundURL, isGuessed }) {
     if (isGuessed) {
       audioRef.current.pause();
     }
-
     audioRef.current.pause();
     audioRef.current.load();
   }, [soundURL, isGuessed]);
@@ -49,6 +48,7 @@ function BirdCard({
   species = '',
   isCurrentBird = false,
   isGuessed = false,
+  isGameEnded,
 }) {
   const currentBirdCardClassName = isCurrentBird ? ' bird-card_current game-block' : '';
 
@@ -69,7 +69,12 @@ function BirdCard({
             {!isCurrentBird && <h3 className="bird-card__name">{name}</h3>}
             {!isCurrentBird && <div className="bird-card__species">{species}</div>}
           </div>
-          {!isCurrentBird && <AudioBlock soundURL={soundURL} isGuessed={isGuessed} />}
+          {!isCurrentBird && (
+            <AudioBlock
+              soundURL={soundURL}
+              isGuessed={isGuessed}
+            />
+          )}
         </div>
       </div>
       <div className="bird-card__main-info">
@@ -79,7 +84,10 @@ function BirdCard({
         </h3>
         )}
         {isCurrentBird && (
-          <AudioBlock soundURL={soundURL} isGuessed={isGuessed} />
+          <AudioBlock
+            soundURL={soundURL}
+            isGuessed={isGuessed}
+          />
         )}
       </div>
       {!isCurrentBird && (

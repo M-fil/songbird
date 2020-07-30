@@ -1,5 +1,10 @@
 const initialState = {
-  allData: [],
+  status: {
+    isLoading: false,
+    isError: false,
+    errorMessage: '',
+  },
+  allData: null,
   birdAnswers: [],
   birds: [],
   currentBirdIndex: 0,

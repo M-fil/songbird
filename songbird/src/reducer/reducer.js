@@ -16,14 +16,40 @@ const {
   RESET_CURRENT_SCORE,
   RESET_MAIN_SCORE,
   GET_ALL_DATA,
+  FETCH_ERROR,
+  FETCH_LOADING,
+  SET_IS_GAME_ENDED,
 } = actionTypes;
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case FETCH_LOADING:
+      return {
+        ...state,
+        status: {
+          isLoading: true,
+          isError: false,
+          errorMessage: '',
+        },
+      };
+    case FETCH_ERROR:
+      return {
+        ...state,
+        status: {
+          isLoading: false,
+          isError: true,
+          errorMessage: action.payload,
+        },
+      };
     case GET_ALL_DATA:
       return {
         ...state,
         allData: action.payload,
+        status: {
+          isLoading: false,
+          isError: false,
+          errorMessage: '',
+        },
       };
     case INCREMENT_BIRD_INDEX:
       return {
@@ -95,6 +121,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         currentScore: 5,
+      };
+    case SET_IS_GAME_ENDED:
+      return {
+        ...state,
+        isGameEnded: action.payload,
       };
     default:
       return state;

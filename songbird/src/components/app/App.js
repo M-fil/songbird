@@ -8,7 +8,6 @@ import reducer from '../../reducer/reducer';
 import actionTypes from '../../reducer/actions';
 
 import {
-  fetchStatuses,
   mainBlockConstants,
   urls,
   resultsBlockConstants,
@@ -42,6 +41,9 @@ const {
   DECREMENT_CURRENT_SCORE,
   RESET_CURRENT_SCORE,
   GET_ALL_DATA,
+  FETCH_ERROR,
+  FETCH_LOADING,
+  SET_IS_GAME_ENDED,
 } = actionTypes;
 
 const {
@@ -56,18 +58,32 @@ const {
 function App() {
   const audio = new Audio();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const fetchData = useCallback(getBirdsInfo, [state.allData]);
-  const { status, data, error } = useQuery('birds', fetchData);
 
   useEffect(() => {
-    console.log('useEffect');
-    if (data) {
-      const { currentQuestionIndicator } = state;
-      dispatch({ type: GET_ALL_DATA, payload: data });
-      dispatch({ type: UPDATE_BIRDS_LIST, payload: { birds: getRandomBirds(data) } });
-      dispatch({ type: UPDATE_BIRD_ANSWERS, payload: data[currentQuestionIndicator] });
-    }
-  }, [data]);
+    let didCancel = false;
+
+    const fetchData = async () => {
+      dispatch({ type: FETCH_LOADING });
+      try {
+        const data = await getBirdsInfo();
+        if (!didCancel) {
+          const { currentQuestionIndicator } = state;
+          dispatch({ type: GET_ALL_DATA, payload: data });
+          dispatch({ type: UPDATE_BIRDS_LIST, payload: { birds: getRandomBirds(data) } });
+          dispatch({ type: UPDATE_BIRD_ANSWERS, payload: data[currentQuestionIndicator] });
+        }
+      } catch (error) {
+        if (!didCancel) {
+          dispatch({ type: FETCH_ERROR, payload: error.message });
+        }
+      }
+    };
+
+    fetchData();
+    return () => {
+      didCancel = true;
+    };
+  }, []);
 
   const answerEventClick = (event) => {
     const target = event.target.closest('[data-answer-id]');
@@ -79,7 +95,7 @@ function App() {
       const { birds, currentBirdIndex } = state;
       const clickedId = target.dataset.answerId;
       const correctId = `${birds[currentBirdIndex].name}-${birds[currentBirdIndex].id}`;
-      const activeBirdObject = data
+      const activeBirdObject = state.allData
         .reduce((acc, cur) => acc.concat(cur))
         .find((bird) => `${bird.name}-${bird.id}` === clickedId);
 
@@ -107,11 +123,11 @@ function App() {
   const nextLevelHandler = () => {
     dispatch({ type: INCREMENT_QUESTION_INDICATOR });
 
-    if (data && data[state.currentQuestionIndicator + 1]) {
+    if (state.allData && state.allData[state.currentQuestionIndicator + 1]) {
       dispatch({ type: INCREMENT_BIRD_INDEX });
       dispatch({
         type: UPDATE_BIRD_ANSWERS,
-        payload: data[state.currentQuestionIndicator + 1],
+        payload: state.allData[state.currentQuestionIndicator + 1],
       });
       dispatch({
         type: UPDATE_EVENT_DATA,
@@ -126,17 +142,13 @@ function App() {
     dispatch({ type: RESET_QUESTION_INDICATOR });
     dispatch({ type: RESET_MAIN_SCORE });
 
-    dispatch({ type: UPDATE_BIRDS_LIST, payload: { birds: getRandomBirds(data) } });
-    dispatch({ type: UPDATE_BIRD_ANSWERS, payload: data[0] });
+    dispatch({ type: UPDATE_BIRDS_LIST, payload: { birds: getRandomBirds(state.allData) } });
+    dispatch({ type: UPDATE_BIRD_ANSWERS, payload: state.allData[0] });
+    dispatch({
+      type: UPDATE_EVENT_DATA,
+      payload: { clickedId: '', activeBirdObject: null },
+    });
   };
-
-  if (status === fetchStatuses.LOADING) {
-    return <Loading />;
-  }
-
-  if (status === fetchStatuses.ERROR) {
-    return <ErrorBlock errorMessage={error.message} />;
-  }
 
   const {
     birdAnswers,
@@ -145,13 +157,20 @@ function App() {
     mainScore,
     currentQuestionIndicator,
     eventData,
+    status,
   } = state;
-  const isGuessed = (birds && birds[currentBirdIndex])
-    && (`${birds[currentBirdIndex].name}-${birds[currentBirdIndex].id}`) === eventData.clickedId;
+  const isGuessed = ((birds && birds[currentBirdIndex])
+    && (`${birds[currentBirdIndex].name}-${birds[currentBirdIndex].id}`) === eventData.clickedId);
+
+  if (status.isError) {
+    return <ErrorBlock errorMessage={status.errorMessage} />;
+  }
 
   return (
-    <div id="game-wrapper">
-      {currentQuestionIndicator === (TYPES_OF_BIRDS_NUMBER)
+    (status.isLoading && !status.isError) ? <Loading />
+      : (
+        <div id="game-wrapper">
+          {currentQuestionIndicator === (TYPES_OF_BIRDS_NUMBER)
         && (
         <ResultsBlock
           score={mainScore}
@@ -160,38 +179,39 @@ function App() {
           isZeroMistakes={mainScore === resultsBlockConstants.MAX_SCORE_FOR_GAME()}
         />
         )}
-      <Header
-        score={mainScore}
-        currentQuestionIndicator={currentQuestionIndicator}
-      />
-      {birds.length && (
-      <main id="main-container">
-        <BirdCard
-          id={`${birds[currentBirdIndex].id}-${birds[currentBirdIndex].name}`}
-          imageURL={birds[currentBirdIndex].image}
-          name={birds[currentBirdIndex].name}
-          soundURL={birds[currentBirdIndex].audio}
-          isGuessed={!!isGuessed}
-          isCurrentBird
-        />
-        <Answers
-          birdAnswers={birdAnswers}
-          activeBirdObject={eventData.activeBirdObject}
-          correctBirdId={`${birds[currentBirdIndex].name}-${birds[currentBirdIndex].id}`}
-          answerEventClick={answerEventClick}
-        />
-        <button
-          type="button"
-          id="next-bird-button"
-          className="answers__next-bird-button"
-          onClick={nextLevelHandler}
-          disabled={!isGuessed}
-        >
-          {NEXT_BUTTON_TEXT}
-        </button>
-      </main>
-      )}
-    </div>
+          <Header
+            score={mainScore}
+            currentQuestionIndicator={currentQuestionIndicator}
+          />
+          {birds.length && (
+          <main id="main-container">
+            <BirdCard
+              id={`${birds[currentBirdIndex].id}-${birds[currentBirdIndex].name}`}
+              imageURL={birds[currentBirdIndex].image}
+              name={birds[currentBirdIndex].name}
+              soundURL={birds[currentBirdIndex].audio}
+              isGuessed={!!isGuessed}
+              isCurrentBird
+            />
+            <Answers
+              birdAnswers={birdAnswers}
+              activeBirdObject={eventData.activeBirdObject}
+              correctBirdId={`${birds[currentBirdIndex].name}-${birds[currentBirdIndex].id}`}
+              answerEventClick={answerEventClick}
+            />
+            <button
+              type="button"
+              id="next-bird-button"
+              className="answers__next-bird-button"
+              onClick={nextLevelHandler}
+              disabled={!isGuessed}
+            >
+              {NEXT_BUTTON_TEXT}
+            </button>
+          </main>
+          )}
+        </div>
+      )
   );
 }
 
