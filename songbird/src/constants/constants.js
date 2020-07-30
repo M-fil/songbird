@@ -19,6 +19,11 @@ const loadingConstants = {
   NUMBER_OF_CIRCLES: 12,
 };
 
+const errorBlockConstants = {
+  ERROR_TEXT: 'Оппс! Ошибка: ',
+  ERROR_FIX_MESSAGE: 'Попробуйте перезагрузить страницу.',
+};
+
 const listOfBirds = {
   WARMING_UP: 'Домашние птицы',
   SPARROW: 'Африканские птицы',
@@ -66,4 +71,5 @@ export {
   resultsBlockConstants,
   fetchStatuses,
   loadingConstants,
+  errorBlockConstants,
 };

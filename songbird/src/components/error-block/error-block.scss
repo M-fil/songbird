@@ -1,0 +1,37 @@
+@import "../../scss/abstract/mixins.scss";
+@import "../../scss/abstract/constants.scss";
+
+.error-block {
+  @include font(3rem, 3.5rem);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+
+  @include media-mobile {
+    @include font(2.5rem, 3rem);
+
+    padding: 5px;
+  }
+}
+
+.error-block__message {
+  text-align: center;
+}
+
+.error-block__image {
+  @include background-image-centered(100% 100%);
+
+  background: url($error-block-image-path);
+  width: 400px;
+  height: 300px;
+  border-radius: 5px;
+
+  @include media-mobile {
+    @include background-image-centered(65% 100%);
+    width: 300px;
+  }
+}

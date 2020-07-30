@@ -81,3 +81,9 @@
     cursor: initial;
   }
 }
+
+@mixin background-image-centered($position: center) {
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: $position !important;
+}

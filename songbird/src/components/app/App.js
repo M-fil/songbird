@@ -147,9 +147,8 @@ function App() {
   const isGuessed = (birds && birds[currentBirdIndex])
     && (`${birds[currentBirdIndex].name}-${birds[currentBirdIndex].id}`) === eventData.clickedId;
 
-  return (
+  /*return (
     <div id="game-wrapper">
-      <Loading />
       {currentQuestionIndicator === (TYPES_OF_BIRDS_NUMBER - 1)
         && (
         <ResultsBlock
@@ -191,7 +190,8 @@ function App() {
       </main>
       )}
     </div>
-  );
+  );*/
+  return <ErrorBlock />
 }
 
 export default App;

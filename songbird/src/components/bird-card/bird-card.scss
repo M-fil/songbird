@@ -76,9 +76,7 @@
 }
 
 .bird-card__image {
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
+  @include background-image-centered;
 
   width: 150px;
   height: 150px;

@@ -6,6 +6,7 @@ $mobile-small-width: 320px;
 
 $logo-path: '../../assets/images/logo.svg';
 $result-block-image-path: '../../assets/images/result-block-image.jpeg';
+$error-block-image-path: '../../assets/images/error-block-image.jpg';
 
 $main-background-color: #222222;
 $game-blocks-background-color: #303030;
@@ -29,3 +30,6 @@ $audio-play-button-color: #008966;
 $spinkit-spinner-color: #ffffff !default;
 $circleCount: 12;
 $animationDuration: 1.2s;
+
+$error-block-background-color: #737373;
+
