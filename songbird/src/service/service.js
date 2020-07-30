@@ -5,6 +5,7 @@ const {
 } = urls;
 
 const getBirdsInfo = async () => {
+  console.log('getBirdsInfo');
   const response = await fetch(BIRDS_INFO_URL);
   const data = await response.json();
   return data;

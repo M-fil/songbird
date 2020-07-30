@@ -41,6 +41,7 @@ const {
   CHANGE_IS_CLICKED_OF_BIRD_ANSWER,
   DECREMENT_CURRENT_SCORE,
   RESET_CURRENT_SCORE,
+  GET_ALL_DATA,
 } = actionTypes;
 
 const {
@@ -56,14 +57,14 @@ function App() {
   const audio = new Audio();
   const [state, dispatch] = useReducer(reducer, initialState);
   const fetchData = useCallback(getBirdsInfo, [state.allData]);
-  const { status, data, error } = useQuery('birds', fetchData, {
-    retry: 1,
-  });
+  const { status, data, error } = useQuery('birds', fetchData);
 
   useEffect(() => {
+    console.log('useEffect');
     if (data) {
       const { currentQuestionIndicator } = state;
-      dispatch({ type: UPDATE_BIRDS_LIST, payload: { data, birds: getRandomBirds(data) } });
+      dispatch({ type: GET_ALL_DATA, payload: data });
+      dispatch({ type: UPDATE_BIRDS_LIST, payload: { birds: getRandomBirds(data) } });
       dispatch({ type: UPDATE_BIRD_ANSWERS, payload: data[currentQuestionIndicator] });
     }
   }, [data]);
@@ -104,9 +105,10 @@ function App() {
   };
 
   const nextLevelHandler = () => {
-    dispatch({ type: INCREMENT_BIRD_INDEX });
     dispatch({ type: INCREMENT_QUESTION_INDICATOR });
+
     if (data && data[state.currentQuestionIndicator + 1]) {
+      dispatch({ type: INCREMENT_BIRD_INDEX });
       dispatch({
         type: UPDATE_BIRD_ANSWERS,
         payload: data[state.currentQuestionIndicator + 1],
@@ -124,7 +126,7 @@ function App() {
     dispatch({ type: RESET_QUESTION_INDICATOR });
     dispatch({ type: RESET_MAIN_SCORE });
 
-    dispatch({ type: UPDATE_BIRDS_LIST, payload: { data, birds: getRandomBirds(data) } });
+    dispatch({ type: UPDATE_BIRDS_LIST, payload: { birds: getRandomBirds(data) } });
     dispatch({ type: UPDATE_BIRD_ANSWERS, payload: data[0] });
   };
 
@@ -147,9 +149,9 @@ function App() {
   const isGuessed = (birds && birds[currentBirdIndex])
     && (`${birds[currentBirdIndex].name}-${birds[currentBirdIndex].id}`) === eventData.clickedId;
 
-  /*return (
+  return (
     <div id="game-wrapper">
-      {currentQuestionIndicator === (TYPES_OF_BIRDS_NUMBER - 1)
+      {currentQuestionIndicator === (TYPES_OF_BIRDS_NUMBER)
         && (
         <ResultsBlock
           score={mainScore}
@@ -190,8 +192,7 @@ function App() {
       </main>
       )}
     </div>
-  );*/
-  return <ErrorBlock />
+  );
 }
 
 export default App;

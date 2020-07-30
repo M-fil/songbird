@@ -13,7 +13,10 @@ function Loading() {
       <div className="sk-fading-circle">
         {
           Array.from({ length: NUMBER_OF_CIRCLES }).map((_, index) => (
-            <div className={`sk-circle sk-circle-${index + 1}`} />
+            <div
+              key={`circle-${index + 1}`}
+              className={`sk-circle sk-circle-${index + 1}`}
+            />
           ))
         }
       </div>

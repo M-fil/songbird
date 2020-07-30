@@ -45,7 +45,7 @@ const resultsBlockConstants = {
   MAX_SCORE_FOR_SINGLE_ANSWER: 5,
   TYPES_OF_BIRDS_NUMBER: Object.values(listOfBirds).length,
   MAX_SCORE_FOR_GAME() {
-    return (Object.values(listOfBirds).length - 1) * this.MAX_SCORE_FOR_SINGLE_ANSWER;
+    return (Object.values(listOfBirds).length) * this.MAX_SCORE_FOR_SINGLE_ANSWER;
   },
   SCORE_TEXT(score) {
     return `Набранные очки: ${score} из ${this.MAX_SCORE_FOR_GAME()}`;
@@ -55,7 +55,7 @@ const resultsBlockConstants = {
   ZERO_MISTAKES_TEXT: 'Урааа! Вы угадали всех птиц без единной ошибки!',
   GET_CERTIFICATE_TEXT: 'Забирайте сертификат знатока птичьих голосов!',
   DOWNLOAD_CERTIFICATE_BUTTON_TEXT: 'Скачать Сертификат',
-  CERTIFICATE_DATA_TEXT: (score, birdsList) => `Поздравляем! Вы теперь настоящий знаток птичьих голосов!\nВы набрали ${score} баллов из ${resultsBlockConstants.MAX_SCORE_FOR_GAME()}.\n\nВы изуличи голоса следущих птиц:\n${birdsList}\n\nСледите за обновлениями приложения SongBird здесь: https://github.com/M-fil/songbird`,
+  CERTIFICATE_DATA_TEXT: (score, birdsList) => `Поздравляем! Вы теперь настоящий знаток птичьих голосов!\nВы набрали ${score} баллов из ${resultsBlockConstants.MAX_SCORE_FOR_GAME()}.\n\nВы изуличи голоса следующих птиц:\n${birdsList}\n\nСледите за обновлениями приложения SongBird здесь: https://github.com/M-fil/songbird`,
 };
 
 const fetchStatuses = {

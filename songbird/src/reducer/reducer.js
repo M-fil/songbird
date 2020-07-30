@@ -1,5 +1,6 @@
 import actionTypes from './actions';
 import shuffle from '../utils/shuffle';
+import { act } from 'react-dom/test-utils';
 
 const {
   INCREMENT_BIRD_INDEX,
@@ -14,10 +15,16 @@ const {
   DECREMENT_CURRENT_SCORE,
   RESET_CURRENT_SCORE,
   RESET_MAIN_SCORE,
+  GET_ALL_DATA,
 } = actionTypes;
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case GET_ALL_DATA:
+      return {
+        ...state,
+        allData: action.payload,
+      };
     case INCREMENT_BIRD_INDEX:
       return {
         ...state,
@@ -41,7 +48,6 @@ const reducer = (state, action) => {
     case UPDATE_BIRDS_LIST:
       return {
         ...state,
-        allData: action.payload.data,
         birds: action.payload.birds,
       };
     case UPDATE_BIRD_ANSWERS: {
