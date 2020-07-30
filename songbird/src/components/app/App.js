@@ -149,6 +149,7 @@ function App() {
 
   return (
     <div id="game-wrapper">
+      <Loading />
       {currentQuestionIndicator === (TYPES_OF_BIRDS_NUMBER - 1)
         && (
         <ResultsBlock

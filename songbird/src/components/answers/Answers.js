@@ -20,7 +20,6 @@ function Answers({
 }) {
   return (
     <div className="answers">
-      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
         className="answers__list game-block"
         onClick={answerEventClick}

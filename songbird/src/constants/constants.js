@@ -15,9 +15,13 @@ const headerConstants = {
   SCORE_TEXT: 'Очки',
 };
 
+const loadingConstants = {
+  NUMBER_OF_CIRCLES: 12,
+};
+
 const listOfBirds = {
-  WARMING_UP: 'Разминка',
-  SPARROW: 'Воробьиные',
+  WARMING_UP: 'Домашние птицы',
+  SPARROW: 'Африканские птицы',
   FOREST_BIRDS: 'Лесные птицы',
   SONG_BIRDS: 'Певчие птицы',
   PREDATORY_BIRDS: 'Хищные птицы',
@@ -61,4 +65,5 @@ export {
   urls,
   resultsBlockConstants,
   fetchStatuses,
+  loadingConstants,
 };

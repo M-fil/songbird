@@ -18,7 +18,7 @@ function CertifacateBlock({ certificateText }) {
         href={`data:application/txt;charset=utf-8,${encodeURIComponent(certificateText)}`}
         className="results-block__download-certificate"
         onClick={() => {}}
-        rel="noreferrer"
+        rel="noopener noreferrer"
         target="_blank"
         download="birds-expert-certificate.txt"
       >

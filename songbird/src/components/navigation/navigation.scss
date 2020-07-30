@@ -8,6 +8,7 @@
 
   background: $navigation-item-background-color;
   border-radius: 5px;
+  overflow: hidden;
 
   @include media-tablet {
     flex-wrap: wrap;
@@ -34,7 +35,7 @@
   cursor: pointer;
   padding: 10px 20px;
   text-align: center;
-  word-break: break-all;
+  word-break: break-word;
 
   @include media-mobile {
     @include font(2.5rem, 3rem);
