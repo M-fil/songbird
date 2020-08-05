@@ -1,7 +1,6 @@
 import React, {
-  useEffect, useCallback, useReducer,
+  useEffect, useReducer,
 } from 'react';
-import { useQuery } from 'react-query';
 
 import initialState from '../../reducer/initialState';
 import reducer from '../../reducer/reducer';
@@ -43,7 +42,6 @@ const {
   GET_ALL_DATA,
   FETCH_ERROR,
   FETCH_LOADING,
-  SET_IS_GAME_ENDED,
 } = actionTypes;
 
 const {

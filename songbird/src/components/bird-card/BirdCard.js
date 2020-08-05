@@ -1,43 +1,20 @@
 import './bird-card.scss';
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   mainBlockConstants,
   urls,
 } from '../../constants/constants';
+import Player from '../audio-player/AudioPlayer';
 
 const {
-  AUDIO_IS_NOT_SUPPORTED,
   UNGUESSED_BIRD_NAME_TEXT,
 } = mainBlockConstants;
 
 const {
   DEFAUL_BIRD_IMAGE_URL,
 } = urls;
-
-function AudioBlock({ soundURL, isGuessed }) {
-  const audioRef = useRef(null);
-  useEffect(() => {
-    if (isGuessed) {
-      audioRef.current.pause();
-    }
-    audioRef.current.pause();
-    audioRef.current.load();
-  }, [soundURL, isGuessed]);
-
-  return (
-    <audio
-      ref={audioRef}
-      className="bird-card__audio"
-      controls
-    >
-      <track kind="captions" />
-      <source src={soundURL} type="audio/mpeg" />
-      {AUDIO_IS_NOT_SUPPORTED}
-    </audio>
-  );
-}
 
 function BirdCard({
   id,
@@ -48,7 +25,6 @@ function BirdCard({
   species = '',
   isCurrentBird = false,
   isGuessed = false,
-  isGameEnded,
 }) {
   const currentBirdCardClassName = isCurrentBird ? ' bird-card_current game-block' : '';
 
@@ -70,7 +46,7 @@ function BirdCard({
             {!isCurrentBird && <div className="bird-card__species">{species}</div>}
           </div>
           {!isCurrentBird && (
-            <AudioBlock
+            <Player
               soundURL={soundURL}
               isGuessed={isGuessed}
             />
@@ -84,7 +60,7 @@ function BirdCard({
         </h3>
         )}
         {isCurrentBird && (
-          <AudioBlock
+          <Player
             soundURL={soundURL}
             isGuessed={isGuessed}
           />
@@ -98,11 +74,6 @@ function BirdCard({
     </div>
   );
 }
-
-AudioBlock.propTypes = {
-  soundURL: PropTypes.string.isRequired,
-  isGuessed: PropTypes.bool.isRequired,
-};
 
 BirdCard.propTypes = {
   id: PropTypes.string.isRequired,

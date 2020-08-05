@@ -1,6 +1,5 @@
 import actionTypes from './actions';
 import shuffle from '../utils/shuffle';
-import { act } from 'react-dom/test-utils';
 
 const {
   INCREMENT_BIRD_INDEX,

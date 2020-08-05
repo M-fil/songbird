@@ -7,8 +7,6 @@ import {
   urls,
 } from '../../constants/constants';
 import playAudio from '../../utils/audio';
-import actionTypes from '../../reducer/actions';
-
 import CertifacateBlock from './CertifacateBlock';
 
 const {
