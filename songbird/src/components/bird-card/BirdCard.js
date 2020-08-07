@@ -56,7 +56,7 @@ function BirdCard({
       <div className="bird-card__main-info">
         {isCurrentBird && (
         <h3 className="bird-card__name">
-          {!isGuessed ? name : UNGUESSED_BIRD_NAME_TEXT()}
+          {isGuessed ? name : UNGUESSED_BIRD_NAME_TEXT()}
         </h3>
         )}
         {isCurrentBird && (
