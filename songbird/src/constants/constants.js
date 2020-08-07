@@ -58,6 +58,12 @@ const resultsBlockConstants = {
   CERTIFICATE_DATA_TEXT: (score, birdsList) => `Поздравляем! Вы теперь настоящий знаток птичьих голосов!\nВы набрали ${score} баллов из ${resultsBlockConstants.MAX_SCORE_FOR_GAME()}.\n\nВы изуличи голоса следующих птиц:\n${birdsList}\n\nСледите за обновлениями приложения SongBird здесь: https://github.com/M-fil/songbird`,
 };
 
+const audioConstants = {
+  ZERO_TIME_TEXT: '00:00',
+  ICON_START: 'play',
+  ICON_PAYSE: 'pause',
+};
+
 export {
   headerConstants,
   listOfBirds,
@@ -66,4 +72,5 @@ export {
   resultsBlockConstants,
   loadingConstants,
   errorBlockConstants,
+  audioConstants,
 };
