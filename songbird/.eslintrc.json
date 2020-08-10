@@ -18,7 +18,6 @@
         "react"
     ],
     "rules": {
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "click-events-have-key-events": "off"
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     }
 }

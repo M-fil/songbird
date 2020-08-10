@@ -1,5 +1,87 @@
-$rhap_theme-color: #008966;
-$rhap_background-color: #008966;
-$rhap_bar-color: #008966;
-$rhap_time-color: #008966;
-$rhap_font-family: inherit;
+.video-container {
+
+background:#000;
+
+width:80%;
+
+color:#fff;
+
+}
+
+.video-player {
+
+width:100%;
+
+margin:0;
+
+}
+
+.video-hud {
+
+margin:0;
+
+padding:1px;
+
+}
+
+.video-hud__element {
+
+cursor:pointer;
+
+display:inline-block;
+
+vertical-align:middle;
+
+height:30px;
+
+}
+
+.video-hud__action {
+
+width:30px;
+
+}
+
+.video-hud__action_play {
+
+background:#ccc;
+
+border-radius:0 100px 100px 0;
+
+}
+
+.video-hud__action_pause {
+
+background:#c00;
+
+}
+
+.video-hud__mute {
+
+width:30px;
+
+border-radius:100px 100px 100px 100px;
+
+}
+
+.video-hud__mute_true {
+
+background:#c00;
+
+}
+
+.video-hud__mute_false {
+
+background:#ccc;
+
+}
+
+.video-hud__download {
+
+background:#ccc;
+
+width:30px;
+
+border-radius:0 0 100px 100px;
+
+}

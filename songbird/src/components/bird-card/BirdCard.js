@@ -6,7 +6,8 @@ import {
   mainBlockConstants,
   urls,
 } from '../../constants/constants';
-import Player from '../audio-player/AudioPlayer';
+import AnswerAudioPlayer from '../audio-player/AnswerAudioPlayer';
+import CurrentAudioPlayer from '../audio-player/CurrentAudioPlayer';
 
 const {
   UNGUESSED_BIRD_NAME_TEXT,
@@ -34,24 +35,26 @@ function BirdCard({
       data-bird-id={`${name}-${id}`}
     >
       <div className="bird-card-short-info">
-        <div
-          className="bird-card__image"
-          style={{
-            backgroundImage: `url(${(isGuessed || !isCurrentBird) ? imageURL : DEFAUL_BIRD_IMAGE_URL})`,
-          }}
-        />
-        <div className="bird-card-short-info__description">
-          <div className="bird-card-short-info__personal">
+      <div className="bird-card__main">
+        <div className="bird-card__short-info">
+          <div
+            className="bird-card__image"
+            style={{
+              backgroundImage: `url(${(isGuessed || !isCurrentBird) ? imageURL : DEFAUL_BIRD_IMAGE_URL})`,
+            }}
+          />
+          <div className="bird-card-short-info__description">
             {!isCurrentBird && <h3 className="bird-card__name">{name}</h3>}
             {!isCurrentBird && <div className="bird-card__species">{species}</div>}
           </div>
-          {!isCurrentBird && (
-            <Player
+        </div>
+        {!isCurrentBird && (
+            <CurrentAudioPlayer
               soundURL={soundURL}
               isGuessed={isGuessed}
             />
-          )}
-        </div>
+        )}
+      </div>
       </div>
       <div className="bird-card__main-info">
         {isCurrentBird && (
@@ -60,7 +63,7 @@ function BirdCard({
         </h3>
         )}
         {isCurrentBird && (
-          <Player
+          <AnswerAudioPlayer
             soundURL={soundURL}
             isGuessed={isGuessed}
           />
