@@ -37,11 +37,10 @@ function BirdCard({
       <div className="bird-card-short-info">
       <div className="bird-card__main">
         <div className="bird-card__short-info">
-          <div
+          <img
             className="bird-card__image"
-            style={{
-              backgroundImage: `url(${(isGuessed || !isCurrentBird) ? imageURL : DEFAUL_BIRD_IMAGE_URL})`,
-            }}
+            src={(isGuessed || !isCurrentBird) ? imageURL : DEFAUL_BIRD_IMAGE_URL}
+            alt={name || ''}
           />
           <div className="bird-card-short-info__description">
             {!isCurrentBird && <h3 className="bird-card__name">{name}</h3>}
