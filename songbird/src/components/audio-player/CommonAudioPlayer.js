@@ -34,7 +34,7 @@ function CommonAudioPlayer() {
         <BrowserUnsupported />
       </Gui>
     </>
-  )
+  );
 }
 
 export default CommonAudioPlayer;

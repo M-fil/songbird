@@ -35,25 +35,25 @@ function BirdCard({
       data-bird-id={`${name}-${id}`}
     >
       <div className="bird-card-short-info">
-      <div className="bird-card__main">
-        <div className="bird-card__short-info">
-          <img
-            className="bird-card__image"
-            src={(isGuessed || !isCurrentBird) ? imageURL : DEFAUL_BIRD_IMAGE_URL}
-            alt={name || ''}
-          />
-          <div className="bird-card-short-info__description">
-            {!isCurrentBird && <h3 className="bird-card__name">{name}</h3>}
-            {!isCurrentBird && <div className="bird-card__species">{species}</div>}
-          </div>
-        </div>
-        {!isCurrentBird && (
-            <CurrentAudioPlayer
-              soundURL={soundURL}
-              isGuessed={isGuessed}
+        <div className="bird-card__main">
+          <div className="bird-card__short-info">
+            <img
+              className="bird-card__image"
+              src={(isGuessed || !isCurrentBird) ? imageURL : DEFAUL_BIRD_IMAGE_URL}
+              alt={name || ''}
             />
-        )}
-      </div>
+            <div className="bird-card-short-info__description">
+              {!isCurrentBird && <h3 className="bird-card__name">{name}</h3>}
+              {!isCurrentBird && <div className="bird-card__species">{species}</div>}
+            </div>
+          </div>
+          {!isCurrentBird && (
+          <CurrentAudioPlayer
+            soundURL={soundURL}
+            isGuessed={isGuessed}
+          />
+          )}
+        </div>
       </div>
       <div className="bird-card__main-info">
         {isCurrentBird && (

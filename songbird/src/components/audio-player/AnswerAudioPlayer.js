@@ -1,8 +1,10 @@
 import './custom.scss';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import JPlayer, { initializeOptions, actions } from 'react-jplayer'
+import JPlayer, { initializeOptions } from 'react-jplayer';
+import PropTypes from 'prop-types';
+
 import CommonAudioPlayer from './CommonAudioPlayer';
 import usePlayer from './usePlayer';
 
@@ -24,9 +26,16 @@ const AnswerAudioPlayer = ({ soundURL, isGuessed, dispatch }) => {
   usePlayer(defaultOptions, soundURL, isGuessed, dispatch);
 
   return (
-  <JPlayer id={defaultOptions.id} className="jp-sleek">
-    <CommonAudioPlayer />
-  </JPlayer>);
+    <JPlayer id={defaultOptions.id} className="jp-sleek">
+      <CommonAudioPlayer />
+    </JPlayer>
+  );
+};
+
+AnswerAudioPlayer.propTypes = {
+  soundURL: PropTypes.string.isRequired,
+  isGuessed: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapState = (state) => ({

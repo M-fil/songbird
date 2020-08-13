@@ -13,7 +13,7 @@ const usePlayer = (defaultOptions, soundURL, isGuessed, dispatch) => {
 
   useEffect(() => {
     if (isGuessed) {
-      dispatch(actions.pause(defaultOptions.id, 0))
+      dispatch(actions.pause(defaultOptions.id, 0));
     }
   }, [isGuessed]);
 };

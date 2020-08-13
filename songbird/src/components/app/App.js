@@ -174,38 +174,42 @@ function App() {
           />
           {birds.length && (
           <main id="main-container">
-          {currentQuestionIndicator === (TYPES_OF_BIRDS_NUMBER)
-            ? <ResultsBlock
-              score={mainScore}
-              playAgainHandler={playAgainHandler}
-              birds={birds}
-              isZeroMistakes={mainScore === resultsBlockConstants.MAX_SCORE_FOR_GAME()}
-            />
-            : <>
-              <BirdCard
-                id={`${birds[currentBirdIndex].id}-${birds[currentBirdIndex].name}`}
-                imageURL={birds[currentBirdIndex].image}
-                name={birds[currentBirdIndex].name}
-                soundURL={birds[currentBirdIndex].audio}
-                isGuessed={!!isGuessed}
-                isCurrentBird
-              />
-              <Answers
-                birdAnswers={birdAnswers}
-                activeBirdObject={eventData.activeBirdObject}
-                correctBirdId={`${birds[currentBirdIndex].name}-${birds[currentBirdIndex].id}`}
-                answerEventClick={answerEventClick}
-              />
-              <button
-                type="button"
-                id="next-bird-button"
-                className="answers__next-bird-button"
-                onClick={nextLevelHandler}
-                disabled={!isGuessed}
-              >
-                {NEXT_BUTTON_TEXT}
-              </button>
-            </>}
+            {currentQuestionIndicator === (TYPES_OF_BIRDS_NUMBER)
+              ? (
+                <ResultsBlock
+                  score={mainScore}
+                  playAgainHandler={playAgainHandler}
+                  birds={birds}
+                  isZeroMistakes={mainScore === resultsBlockConstants.MAX_SCORE_FOR_GAME()}
+                />
+              )
+              : (
+                <>
+                  <BirdCard
+                    id={`${birds[currentBirdIndex].id}-${birds[currentBirdIndex].name}`}
+                    imageURL={birds[currentBirdIndex].image}
+                    name={birds[currentBirdIndex].name}
+                    soundURL={birds[currentBirdIndex].audio}
+                    isGuessed={!!isGuessed}
+                    isCurrentBird
+                  />
+                  <Answers
+                    birdAnswers={birdAnswers}
+                    activeBirdObject={eventData.activeBirdObject}
+                    correctBirdId={`${birds[currentBirdIndex].name}-${birds[currentBirdIndex].id}`}
+                    answerEventClick={answerEventClick}
+                  />
+                  <button
+                    type="button"
+                    id="next-bird-button"
+                    className="answers__next-bird-button"
+                    onClick={nextLevelHandler}
+                    disabled={!isGuessed}
+                  >
+                    {NEXT_BUTTON_TEXT}
+                  </button>
+                </>
+              )}
           </main>
           )}
         </div>
