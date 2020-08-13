@@ -2,23 +2,6 @@
 @import "../../scss/abstract/mixins.scss";
 @import "../../scss/abstract/placeholders.scss";
 
-.result-block-overflow {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin: auto;
-  z-index: 1000;
-
-  background: $standard-overflow-background-color;
-}
-
 .results-block {
   display: flex;
   flex-direction: column;
@@ -29,13 +12,8 @@
   border: 3px solid $standard-border-color;
   border-radius: 10px;
 
-  width: 50vmax;
   height: fit-content;
   padding: 20px;
-
-  @include media-tablet {
-    width: 80vmin;
-  }
 }
 
 .result-block__image {
@@ -63,7 +41,9 @@
 
 .results-block__score {
   @include font(2rem, 2.5rem);
+
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .results-block__certificate {

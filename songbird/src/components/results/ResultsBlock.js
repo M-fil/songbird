@@ -34,26 +34,24 @@ function ResultsBlock({
   const certificateText = CERTIFICATE_DATA_TEXT(score, birdsList);
 
   return (
-    <div className="result-block-overflow">
-      <div className="results-block">
-        <div className="results-block__text">
-          {FINISH_ROUND_TEXT}
-          {isZeroMistakes ? <div>{ZERO_MISTAKES_TEXT}</div> : ''}
-        </div>
-        {isZeroMistakes && <CertifacateBlock certificateText={certificateText} />}
-        <div className="results-block__score">
-          {`${resultsBlockConstants.SCORE_TEXT(score)}`}
-        </div>
-        <div className="result-block__image" />
-        <button
-          type="button"
-          id="play-again-button"
-          className="results-block__play-again-button"
-          onClick={playAgainHandler}
-        >
-          {PLAY_AGAIN_BUTTON_TEXT}
-        </button>
+    <div className="results-block">
+      <div className="results-block__text">
+        {FINISH_ROUND_TEXT}
+        {isZeroMistakes ? <div>{ZERO_MISTAKES_TEXT}</div> : ''}
       </div>
+      {isZeroMistakes && <CertifacateBlock certificateText={certificateText} />}
+      <div className="results-block__score">
+        {`${resultsBlockConstants.SCORE_TEXT(score)}`}
+      </div>
+      <div className="result-block__image" />
+      <button
+        type="button"
+        id="play-again-button"
+        className="results-block__play-again-button"
+        onClick={playAgainHandler}
+      >
+        {PLAY_AGAIN_BUTTON_TEXT}
+      </button>
     </div>
   );
 }
