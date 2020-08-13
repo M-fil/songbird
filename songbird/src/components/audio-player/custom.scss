@@ -270,6 +270,10 @@
   padding-right: 3px;
 }
 
+.jp-play, .jp-mute {
+	cursor: pointer;
+}
+
 .jp-play-bar {
   position: absolute;
   top: calc(100% - 10px);

@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import JPlayer, { initializeOptions, actions } from 'react-jplayer'
 import CommonAudioPlayer from './CommonAudioPlayer';
+import usePlayer from './usePlayer';
 
 const defaultOptions = {
   id: 'AnswerAudioPlayer',
@@ -19,15 +20,8 @@ const defaultOptions = {
 
 initializeOptions(defaultOptions);
 
-const AnswerAudioPlayer = ({ soundURL, dispatch }) => {
-  useEffect(() => {
-    dispatch(actions.setOption(defaultOptions.id, 'media', {
-      ...defaultOptions.media,
-      sources: {
-        mp3: soundURL,
-      },
-    }));
-  }, [soundURL]);
+const AnswerAudioPlayer = ({ soundURL, isGuessed, dispatch }) => {
+  usePlayer(defaultOptions, soundURL, isGuessed, dispatch);
 
   return (
   <JPlayer id={defaultOptions.id} className="jp-sleek">
@@ -37,7 +31,7 @@ const AnswerAudioPlayer = ({ soundURL, dispatch }) => {
 
 const mapState = (state) => ({
   ...state,
-  sources: state.jPlayers.AudioPlayer.sources,
+  sources: state.jPlayers.AnswerAudioPlayer?.sources,
 });
 
 export default connect(mapState)(AnswerAudioPlayer);
