@@ -5,7 +5,7 @@ import DEFAUL_BIRD_IMAGE_URL from '../assets/images/default-bird-image.png';
 
 const urls = {
   DEFAUL_BIRD_IMAGE_URL,
-  BIRDS_INFO_URL: 'https://raw.githubusercontent.com/M-fil/tasks/master/tasks/songbird/birds.json',
+  BIRDS_INFO_URL: 'https://raw.githubusercontent.com/M-fil/data-storage/master/songbird/birds.json',
   ERROR_SOUND_PATH,
   CORRECT_SOUND_PATH,
   WIN_SOUND_PATH,
@@ -26,11 +26,11 @@ const errorBlockConstants = {
 
 const listOfBirds = {
   WARMING_UP: 'Разминка',
-  SPARROW: 'Воробьиные',
-  FOREST_BIRDS: 'Лесные птицы',
-  SONG_BIRDS: 'Певчие птицы',
-  PREDATORY_BIRDS: 'Хищные птицы',
-  SEA_BIRDS: 'Морские птицы',
+  SPARROW: 'Птицы Болот',
+  FOREST_BIRDS: 'Птицы пустынь',
+  SONG_BIRDS: 'Тропические птицы',
+  PREDATORY_BIRDS: 'Домашние птицы',
+  SEA_BIRDS: 'Африканские птицы',
 };
 
 const mainBlockConstants = {
